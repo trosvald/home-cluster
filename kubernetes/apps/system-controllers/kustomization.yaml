@@ -5,5 +5,7 @@ resources:
   # Pre Flux-Kustomizations
   - ./namespace.yaml
   # Flux-Kustomizations
-  - ./cilium/ks.yaml
-  - ./metrics-server/ks.yaml
+  # - ./k8s-ycl/ks.yaml
+  - ./k8tz/ks.yaml
+  - ./kubelet-csr-approver/ks.yaml
+  - ./snapshot-controller/ks.yaml
