@@ -12,19 +12,21 @@ vars:
 
 tasks:
   generate:
-    internal: true
+    # internal: true
     desc: Generate Talos machine configurations (task talos:generate)
     dir: infrastructure/talos
     cmds:
-      - talhelper genconfig
-    sources:
-      - talconfig.yaml
-      - talenv.sops.yaml
-      - talenv.yaml
-      - talsecret.sops.yaml
-    generates:
-      - clusterconfig/*.yaml
-      - clusterconfig/talosconfig
+      - echo "Generating talos machine configs..."
+      - sleep 3
+      - ./generate-clusterconfig.sh
+  # sources:
+  #   - talconfig.yaml
+  #   - talenv.sops.yaml
+  #   - talenv.yaml
+  #   - talsecret.sops.yaml
+  # generates:
+  #   - clusterconfig/*.yaml
+  #   - clusterconfig/talosconfig
 
   wait_for_health:
     internal: true
@@ -38,7 +40,7 @@ tasks:
     desc: Apply Talos config to a node in maintenance mode
     dir: infrastructure/talos
     cmds:
-      - task: generate
+      # - task: generate
       - talosctl apply-config -i -n {{ .IP }} -f clusterconfig/talos-{{ .NODE }}.{{ .DOMAIN }}.yaml
 
   upgrade:
@@ -58,8 +60,8 @@ tasks:
     desc: Init talosctl and grab kubeconfig (task talos:init)
     cmds:
       - task: generate
-      - talosctl config merge infrastructure/talos/clusterconfig/talosconfig
-      - talosctl --talosconfig=infrastructure/talos/clusterconfig/talosconfig kubeconfig -n cluster-0.{{ .DOMAIN }} $KUBECONFIG
+      # - talosctl config merge infrastructure/talos/clusterconfig/talosconfig
+      # - talosctl --talosconfig=infrastructure/talos/clusterconfig/talosconfig kubeconfig -n cluster-0.{{ .DOMAIN }} $KUBECONFIG
 
   deploy-integrations:
     internal: true

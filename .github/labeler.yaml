@@ -1,0 +1,13 @@
+---
+area/ansible:
+  - "infrastructure/ansible/**/*"
+area/taskfiles:
+  - ".taskfiles/**/*"
+area/talos:
+  - "infrastructure/talos/**/*"
+area/github:
+  - ".github/**/*"
+area/kubernetes:
+  - "kubernetes/**/*"
+area/terraform:
+  - "infrastructure/terraform/**/*"

@@ -1,1 +1,1 @@
-ageKeyFile: ~/.config/sops/age/age.key
+ageKeyFile: $HOME/.config/sops/age/keys.txt

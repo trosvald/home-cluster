@@ -13,7 +13,7 @@ kubernetesVersion: 1.28.3
 #         officialExtensions:
 #             - siderolabs/i915-ucode
 #             - siderolabs/intel-ucode
-#talosImageURL: factory.talos.dev/installer/22b1d04da881ef7c57edb0f24d1f3ba2c78a8e22cbe3fa9af4f42d487b2863f7
+# talosImageURL: factory.talos.dev/installer/22b1d04da881ef7c57edb0f24d1f3ba2c78a8e22cbe3fa9af4f42d487b2863f7
 
 cniConfig:
   name: none
@@ -38,9 +38,9 @@ nodes:
       - interface: eth0
         dhcp: true
         mtu: 1500
-    # nodeLabels: &masterLabels
-    #   topology.kubernetes.io/region: ${clusterName}
-    #   topology.kubernetes.io/zone: k8s-master
+  # nodeLabels: &masterLabels
+  #   topology.kubernetes.io/region: ${clusterName}
+  #   topology.kubernetes.io/zone: k8s-master
 
   - hostname: k8s-m1.${domainName}
     ipAddress: 172.16.11.11
@@ -53,7 +53,7 @@ nodes:
       - interface: eth0
         dhcp: true
         mtu: 1500
-    # nodeLabels: *masterLabels
+  # nodeLabels: *masterLabels
 
   - hostname: k8s-m2.${domainName}
     ipAddress: 172.16.11.12
@@ -66,7 +66,7 @@ nodes:
       - interface: eth0
         dhcp: true
         mtu: 1500
-    # nodeLabels: *masterLabels
+  # nodeLabels: *masterLabels
 
   ### Worker Node
   ### Mixed Thinkcentre M720q & M910x
@@ -80,14 +80,14 @@ nodes:
     nameservers:
       - 172.16.16.5
     networkInterfaces:
-      - interface: eth0 
+      - interface: eth0
         ignore: true
       # - interface: bond0
       #   bond:
       #     mode: active-backup
       #     miimon: 100
       #     deviceSelectors:
-      #       - hardwareAddr: e4:1d:79:67:75:95 
+      #       - hardwareAddr: e4:1d:79:67:75:95
       #       - hardwareAddr: e4:1d:79:67:75:96
       - interface: eth1
         dhcp: true
@@ -102,8 +102,13 @@ nodes:
     #   node-role.kubernetes.io/worker: worker
     #   topology.kubernetes.io/region: ${clusterName}
     #   topology.kubernetes.io/zone: k8s-worker
+    patches:
+      - |-
+        machine:
+          install:
+            image: ghcr.io/trosvald/installer-worker:v1.5.5
 
-  #M720Q
+  # M720Q
   - hostname: k8s-w1.${domainName}
     ipAddress: 172.16.11.14
     installDisk: /dev/sda
@@ -112,7 +117,7 @@ nodes:
     nameservers:
       - 172.16.16.5
     networkInterfaces:
-      - interface: eth0 
+      - interface: eth0
         ignore: true
       # - interface: bond0
       #   bond:
@@ -131,6 +136,11 @@ nodes:
               - 172.16.13.14/24
             mtu: 1500
     # nodeLabels: *workerLabels
+    patches:
+      - |-
+        machine:
+          install:
+            image: ghcr.io/trosvald/installer-worker:v1.5.5
 
   # M720Q
   - hostname: k8s-w2.${domainName}
@@ -141,7 +151,7 @@ nodes:
     nameservers:
       - 172.16.16.5
     networkInterfaces:
-      - interface: eth0 
+      - interface: eth0
         ignore: true
       # - interface: bond0
       #   bond:
@@ -160,8 +170,13 @@ nodes:
               - 172.16.13.15/24
             mtu: 1500
     # nodeLabels: *workerLabels
-  
-  #M920X
+    patches:
+      - |-
+        machine:
+          install:
+            image: ghcr.io/trosvald/installer-worker:v1.5.5
+
+  # M920X
   - hostname: k8s-w3.${domainName}
     ipAddress: 172.16.11.16
     installDisk: /dev/nvme1n1
@@ -191,11 +206,16 @@ nodes:
               - 172.16.13.16/24
             mtu: 1500
     # nodeLabels: *workerLabels
-patches:
-  - |-
-    machine:
-      install:
-        image: ghcr.io/trosvald/installer-worker:v1.5.5
+    patches:
+      - |-
+        machine:
+          install:
+            image: ghcr.io/trosvald/installer-worker:v1.5.5
+# patches:
+#   - |-
+#     machine:
+#       install:
+#         image: ghcr.io/trosvald/installer-worker:v1.5.5
 
 controlPlane:
   patches:
@@ -305,4 +325,4 @@ worker:
         time:
           disabled: false
           servers:
-            - 172.16.10.254      
+            - 172.16.10.254
