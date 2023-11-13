@@ -1,0 +1,63 @@
+---
+cluster:
+  name: cluster-0
+  id: 1
+bgpControlPlane:
+  enabled: true
+bgp:
+  enabled: false
+  announce:
+    loadbalancerIP: true
+    podCIDR: false
+k8sServiceHost: "localhost" # kubeprism load balancer
+k8sServicePort: 7445
+rollOutCiliumPods: true
+localRedirectPolicy: true
+kubeProxyReplacement: true
+kubeProxyReplacementHealthzBindAddr: 0.0.0.0:10256
+loadBalancer:
+  algorithm: maglev
+  mode: dsr
+ipam:
+  mode: kubernetes
+operator:
+  enabled: true
+  rollOutPods: true
+autoDirectNodeRoutes: true
+#Cluster PoD CIDR
+ipv4NativeRoutingCIDR: 10.244.0.0/16
+tunnel: disabled
+containerRuntime:
+  integration: containerd
+hubble:
+  enabled: true
+  serviceMonitor:
+    enabled: false
+  metrics:
+    enabled:
+      - dns:query;ignoreAAAA
+      - drop
+      - tcp
+      - flow
+      - port-distribution
+      - icmp
+      - http
+  relay:
+    enabled: true
+    rollOutPods: true
+  ui:
+    enabled: true
+    rollOutPods: true
+    ingress:
+      enabled: false
+securityContext:
+  privileged: true
+  capabilities:
+    ciliumAgent: "{CHOWN,KILL,NET_ADMIN,NET_RAW,IPC_LOCK,SYS_ADMIN,SYS_RESOURCE,DAC_OVERRIDE,FOWNER,SETGID,SETUID}"
+    cleanCiliumState: "{NET_ADMIN,SYS_ADMIN,SYS_RESOURCE}"
+cgroup:
+  autoMount:
+    enabled: false
+  hostRoot: /sys/fs/cgroup
+endpointRoutes:
+  enabled: true

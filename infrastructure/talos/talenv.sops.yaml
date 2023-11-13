@@ -1,0 +1,10 @@
+clusterName: cluster-0
+domainName: monosense.io
+clusterEndpointIP: 172.16.16.4
+upsmonMasterHost: 
+upsmonMasterUser: 
+upsmonMasterPass: 
+upsmonWorkerHost: 
+upsmonWorkerUser: 
+upsmonWorkerPass: 
+vectorAggregatorAddr: 

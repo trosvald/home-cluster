@@ -1,0 +1,22 @@
+---
+version: "3"
+
+tasks:
+
+  cf:init:
+    desc: Initialize terraform dependencies
+    dir: infrastructure/terraform/cloudflare
+    cmds:
+      - terraform init {{.CLI_ARGS}}
+
+  cf:plan:
+    desc: Show the changes terraform will make
+    dir: infrastructure/terraform/cloudflare
+    cmds:
+      - terraform plan {{.CLI_ARGS}}
+
+  cf:apply:
+    desc: Apply the changes to Cloudflare
+    dir: infrastructure/terraform/cloudflare
+    cmds:
+      - terraform apply {{.CLI_ARGS}}
