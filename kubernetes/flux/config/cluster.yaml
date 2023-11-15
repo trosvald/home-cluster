@@ -9,7 +9,7 @@ spec:
   interval: 30m
   ref:
     branch: master
-  url: https://github.com/monosense25/home-cluster
+  url: https://github.com/trosvald/home-cluster
   ignore: |
     # exclude all
     /*
