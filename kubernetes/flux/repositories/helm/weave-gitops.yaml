@@ -3,9 +3,9 @@
 apiVersion: source.toolkit.fluxcd.io/v1beta2
 kind: HelmRepository
 metadata:
-  name: bitnami
+  name: weave-gitops
   namespace: flux-system
 spec:
   interval: 30m
-  url: https://charts.bitnami.com/bitnami
+  url: https://helm.gitops.weave.works
   timeout: 3m
