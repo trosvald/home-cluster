@@ -46,7 +46,7 @@ tasks:
     dir: infrastructure/talos
     cmds:
       # - task: generate
-      - talosctl apply-config -i -n {{ .IP }} -f clusterconfig/talos-{{ .NODE }}.{{ .DOMAIN }}.yaml
+      - talosctl apply-config -i -n {{ .IP }} -f clusterconfig/cluster-0-{{ .NODE }}.{{ .DOMAIN }}.yaml
 
   upgrade:
     internal: true
@@ -65,6 +65,7 @@ tasks:
     desc: Init talosctl and grab kubeconfig (task talos:init)
     cmds:
       - task: generate
+      - export TALOSCONFIG=/Users/diannovitasari/gitops/home-cluster/infrastructure/talos/clusterconfig/talosconfig
       # - talosctl config merge infrastructure/talos/clusterconfig/talosconfig
       # - talosctl --talosconfig=infrastructure/talos/clusterconfig/talosconfig kubeconfig -n cluster-0.{{ .DOMAIN }} $KUBECONFIG
 
@@ -98,9 +99,9 @@ tasks:
       - sleep 240
       - echo "Bootstrapping etcd"
       - talosctl bootstrap -n cluster-0.{{ .DOMAIN }}
-      - sleep 240
+      - sleep 360
       - task: init
-      - kubectl certificate approve $(kubectl get csr --sort-by=.metadata.creationTimestamp | grep Pending | awk '{print $1}')
+      # - kubectl certificate approve $(kubectl get csr --sort-by=.metadata.creationTimestamp | grep Pending | awk '{print $1}')
       - task: deploy-integrations
 
   apply:
