@@ -34,6 +34,11 @@ tasks:
     cmds:
       # Ensure CloudNative-PG cluster has 3 ready instances
       - kubectl -n database wait --for jsonpath='{.status.readyInstances}'='3' --timeout {{ .TIMEOUT | default "30s" }} cluster postgres
+  reset:
+    desc: Reset all talos machine
+    dir: infrastructure/talos
+    cmds:
+      - ./reset.sh
 
   apply-insecure:
     internal: true
