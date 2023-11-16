@@ -21,7 +21,7 @@ spec:
     fullnameOverride: &name externaldns-external
 
     domainFilters:
-      - bjw-s.dev
+      - monosense.io
 
     env:
       - name: CF_API_TOKEN
