@@ -15,7 +15,7 @@ metadata:
   name: annotations
 annotations:
   meta.helm.sh/release-name: kubelet-csr-approver
-  meta.helm.sh/release-namespace: kube-system
+  meta.helm.sh/release-namespace: system-controllers
 fieldSpecs:
   - path: metadata/annotations
     create: true

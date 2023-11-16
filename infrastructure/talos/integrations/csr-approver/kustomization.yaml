@@ -7,7 +7,7 @@ helmCharts:
     repo: https://postfinance.github.io/kubelet-csr-approver
     version: 1.0.5
     releaseName: kubelet-csr-approver
-    namespace: kube-system
+    namespace: system-controllers
     valuesFile: values.yaml
 
 transformers:
