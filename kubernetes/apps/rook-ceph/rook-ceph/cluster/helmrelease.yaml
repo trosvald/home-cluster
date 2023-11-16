@@ -102,7 +102,7 @@ spec:
             devices:
               - name: "/dev/disk/by-id/nvme-PNY_CS2241_1TB_SSD_PNY23242306160103994"
     ingress:
-      ingressClassName: "internal-nginx"
+      ingressClassName: internal-nginx
       dashboard:
         annotations:
           nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
