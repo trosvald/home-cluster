@@ -15,6 +15,7 @@ dotenv: [".config.env"]
 #   # KUBECONFIG: "$HOME/.kube/kubeconfig"
 
 includes:
+  rook: .taskfiles/Rook.yaml
   kubernetes: .taskfiles/Kubernetes.yaml
   precommit: .taskfiles/Precommit.yaml
   talos: .taskfiles/Talos.yaml

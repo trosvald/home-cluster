@@ -36,7 +36,12 @@ nodes:
       - 172.16.16.5
     networkInterfaces:
       - interface: eth0
-        dhcp: true
+        dhcp: false
+        addresses:
+          - 172.16.11.10/24
+        routes:
+          - network: 0.0.0.0/0
+            gateway: 172.16.11.254
         mtu: 1500
   # nodeLabels: &masterLabels
   #   topology.kubernetes.io/region: ${clusterName}
@@ -56,7 +61,12 @@ nodes:
       - 172.16.16.5
     networkInterfaces:
       - interface: eth0
-        dhcp: true
+        dhcp: false
+        addresses:
+          - 172.16.11.11/24
+        routes:
+          - network: 0.0.0.0/0
+            gateway: 172.16.11.254
         mtu: 1500
   # nodeLabels: *masterLabels
     patches:
@@ -75,7 +85,12 @@ nodes:
       - 172.16.16.5
     networkInterfaces:
       - interface: eth0
-        dhcp: true
+        dhcp: false
+        addresses:
+          - 172.16.11.12/24
+        routes:
+          - network: 0.0.0.0/0
+            gateway: 172.16.11.254
         mtu: 1500
   # nodeLabels: *masterLabels
     patches:
@@ -106,7 +121,12 @@ nodes:
       #       - hardwareAddr: e4:1d:79:67:75:95
       #       - hardwareAddr: e4:1d:79:67:75:96
       - interface: eth1
-        dhcp: true
+        dhcp: false
+        addresses:
+          - 172.16.11.13/24
+        routes:
+          - network: 0.0.0.0/0
+            gateway: 172.16.11.254
         mtu: 1500
         vlans:
           - vlanId: 1613
@@ -143,7 +163,12 @@ nodes:
       #       - hardwareAddr: e4:1d:85:75:d8:73
       #       - hardwareAddr: e4:1d:85:75:d8:74
       - interface: eth1
-        dhcp: true
+        dhcp: false
+        addresses:
+          - 172.16.11.14/24
+        routes:
+          - network: 0.0.0.0/0
+            gateway: 172.16.11.254
         mtu: 1500
         vlans:
           - vlanId: 1613
@@ -177,7 +202,12 @@ nodes:
       #       - hardwareAddr: e4:1d:7a:67:a5:d4
       #       - hardwareAddr: e4:1d:7a:67:a5:d5
       - interface: eth1
-        dhcp: true
+        dhcp: false
+        addresses:
+          - 172.16.11.15/24
+        routes:
+          - network: 0.0.0.0/0
+            gateway: 172.16.11.254
         mtu: 1500
         vlans:
           - vlanId: 1613
@@ -213,7 +243,12 @@ nodes:
       #   dhcp: true
       #   mtu: 1500
       - interface: eth1
-        dhcp: true
+        dhcp: false
+        addresses:
+          - 172.16.11.16/24
+        routes:
+          - network: 0.0.0.0/0
+            gateway: 172.16.11.254
         mtu: 1500
         vlans:
           - vlanId: 1613
