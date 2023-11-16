@@ -41,6 +41,11 @@ nodes:
   # nodeLabels: &masterLabels
   #   topology.kubernetes.io/region: ${clusterName}
   #   topology.kubernetes.io/zone: k8s-master
+    patches:
+      - |-
+        machine:
+          install:
+            image: ghcr.io/tripranata/installer-master:v1.5.5
 
   - hostname: k8s-m1.${domainName}
     ipAddress: 172.16.11.11
@@ -54,6 +59,12 @@ nodes:
         dhcp: true
         mtu: 1500
   # nodeLabels: *masterLabels
+    patches:
+      - |-
+        machine:
+          install:
+            image: ghcr.io/tripranata/installer-master:v1.5.5
+
 
   - hostname: k8s-m2.${domainName}
     ipAddress: 172.16.11.12
@@ -67,6 +78,11 @@ nodes:
         dhcp: true
         mtu: 1500
   # nodeLabels: *masterLabels
+    patches:
+      - |-
+        machine:
+          install:
+            image: ghcr.io/tripranata/installer-master:v1.5.5
 
   ### Worker Node
   ### Mixed Thinkcentre M720q & M910x

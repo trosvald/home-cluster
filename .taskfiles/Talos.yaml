@@ -34,6 +34,7 @@ tasks:
     cmds:
       # Ensure CloudNative-PG cluster has 3 ready instances
       - kubectl -n database wait --for jsonpath='{.status.readyInstances}'='3' --timeout {{ .TIMEOUT | default "30s" }} cluster postgres
+
   reset:
     desc: Reset all talos machine
     dir: infrastructure/talos
@@ -48,9 +49,9 @@ tasks:
       # - task: generate
       - talosctl apply-config -i -n {{ .IP }} -f clusterconfig/cluster-0-{{ .NODE }}.{{ .DOMAIN }}.yaml
 
-  upgrade:
+  upgrade-master:
     internal: true
-    desc: Upgrade a single node to Talos version {{ .TALOS_VERSION }} (task talos:upgrade NODE=master-0)
+    desc: Upgrade a single node to Talos version {{ .TALOS_VERSION }} (task talos:upgrade NODE=k8s-m0)
     dir: infrastructure/talos
     status:
       - talosctl version -n {{ .NODE }}.{{ .DOMAIN }} --short | grep 'Tag.*{{ .TALOS_VERSION }}'
@@ -59,13 +60,26 @@ tasks:
         vars: {TIMEOUT: 10m}
       - task: apply
         vars: {NODE: "{{ .NODE }}", CLI_ARGS: "-m no-reboot"}
-      - talosctl upgrade -n {{ .NODE }}.{{ .DOMAIN }} -m powercycle --image ghcr.io/ishioni/installer:{{ .TALOS_VERSION }}
+      - talosctl upgrade -n {{ .NODE }}.{{ .DOMAIN }} -m powercycle --image ghcr.io/tripranata/installer-master:{{ .TALOS_VERSION }}
+
+  upgrade-worker:
+    internal: true
+    desc: Upgrade a single node to Talos version {{ .TALOS_VERSION }} (task talos:upgrade NODE=k8s-w0)
+    dir: infrastructure/talos
+    status:
+      - talosctl version -n {{ .NODE }}.{{ .DOMAIN }} --short | grep 'Tag.*{{ .TALOS_VERSION }}'
+    cmds:
+      - task: wait_for_health
+        vars: {TIMEOUT: 10m}
+      - task: apply
+        vars: {NODE: "{{ .NODE }}", CLI_ARGS: "-m no-reboot"}
+      - talosctl upgrade -n {{ .NODE }}.{{ .DOMAIN }} -m powercycle --image ghcr.io/trosvald/installer-worker:{{ .TALOS_VERSION }}
 
   init:
     desc: Init talosctl and grab kubeconfig (task talos:init)
     cmds:
       - task: generate
-      - export TALOSCONFIG=/Users/diannovitasari/gitops/home-cluster/infrastructure/talos/clusterconfig/talosconfig
+      - export TALOSCONFIG=~/devops/home-cluster/infrastructure/talos/clusterconfig/talosconfig
       # - talosctl config merge infrastructure/talos/clusterconfig/talosconfig
       # - talosctl --talosconfig=infrastructure/talos/clusterconfig/talosconfig kubeconfig -n cluster-0.{{ .DOMAIN }} $KUBECONFIG
 
@@ -96,10 +110,11 @@ tasks:
       - task: apply-insecure
         vars: {IP: "172.16.11.16", NODE: "k8s-w3"}
       - echo "Wait for install"
-      - sleep 240
+      - sleep 300
       - echo "Bootstrapping etcd"
       - talosctl bootstrap -n cluster-0.{{ .DOMAIN }}
       - sleep 360
+      - talosctl -n cluster-0.{{ .DOMAIN }} kubeconfig -f
       - task: init
       # - kubectl certificate approve $(kubectl get csr --sort-by=.metadata.creationTimestamp | grep Pending | awk '{print $1}')
       - task: deploy-integrations
