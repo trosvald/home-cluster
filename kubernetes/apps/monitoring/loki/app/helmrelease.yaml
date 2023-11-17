@@ -62,7 +62,8 @@ spec:
           storage:
             s3:
               s3: null
-              insecure: true
+              # insecure default value are set to TRUE
+              insecure: false
               s3forcepathstyle: true
           ring:
             kvstore:
