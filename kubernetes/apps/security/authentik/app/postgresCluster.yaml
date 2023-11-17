@@ -21,11 +21,11 @@ spec:
   #         bucket: "crunchy-postgres"
   #         endpoint: "s3.monosense.io:9000"
   #         region: "dpkptr-south-rack1"
-  patroni:
-    dynamicConfiguration:
-      synchronous_mode: true
-      postgresql:
-        synchronous_commit: "on"
+  # patroni:
+  #   dynamicConfiguration:
+  #     synchronous_mode: true
+  #     postgresql:
+  #       synchronous_commit: "on"
   instances:
     - name: postgres
       replicas: 2
