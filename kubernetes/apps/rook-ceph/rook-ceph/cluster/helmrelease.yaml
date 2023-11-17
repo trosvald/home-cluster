@@ -34,6 +34,9 @@ spec:
 
       resources:
         mgr:
+          modules:
+            - name: rook
+              enabled: true
           requests:
             cpu: "125m"
             memory: "549M"
