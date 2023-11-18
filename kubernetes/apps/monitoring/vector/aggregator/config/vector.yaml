@@ -67,7 +67,7 @@ transforms:
       r5 = replace(r4, "172.16.11.14", "k8s-w1")
       r6 = replace(r5, "172.16.11.15", "k8s-w2")
       r7 = replace(r6, "172.16.11.15", "k8s-w3")
-      .node = r8
+      .node = r7
 
   service_hostname_transform:
     type: remap
@@ -80,7 +80,7 @@ transforms:
       r5 = replace(r4, "172.16.11.14", "k8s-w1")
       r6 = replace(r5, "172.16.11.15", "k8s-w2")
       r7 = replace(r6, "172.16.11.16", "k8s-w3")
-      .node = r6
+      .node = r7
 
   # [63950.153039] [wan-local-default-D]IN=eth4 OUT= MAC=xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx SRC=xxx.xxx.xxx.xxx DST=xxx.xxx.xxx.xxx LEN=40 TOS=0x00 PREC=0x00 TTL=240 ID=60610 PROTO=TCP SPT=53451 DPT=2002 WINDOW=1024 RES=0x00 SYN URGP=0
   # vyos_firewall_route:
