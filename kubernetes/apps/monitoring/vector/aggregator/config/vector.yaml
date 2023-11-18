@@ -11,7 +11,7 @@ enrichment_tables:
 
 # Sources
 sources:
-  kubernetes_source:
+  kubernetes_logs:
     address: 0.0.0.0:6000
     type: vector
     version: "2"
@@ -49,7 +49,7 @@ transforms:
   kubernetes_remap:
     type: remap
     inputs:
-      - kubernetes_source
+      - kubernetes_logs
     source: |
       # Standardize 'app' index
       .custom_app_name = .pod_labels."app.kubernetes.io/name" || .pod_labels.app || .pod_labels."k8s-app" || "unknown"
