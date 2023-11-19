@@ -18,8 +18,15 @@ spec:
       interval: 30m
   install:
     crds: CreateReplace
+    remediation:
+      retries: 3
   upgrade:
+    cleanupOnFail: true
     crds: CreateReplace
+    remediation:
+      retries: 3
+  uninstall:
+    keepHistory: false
   values:
     controller:
       volumeSnapshotClasses:
@@ -41,5 +48,15 @@ spec:
             csi.storage.k8s.io/snapshotter-secret-name: rook-csi-cephfs-provisioner
             csi.storage.k8s.io/snapshotter-secret-namespace: rook-ceph
           deletionPolicy: Delete
+        - name: truenas-nfs
+          driver: org.democratic-csi.nfs
+          deletionPolicy: Delete
+          parameters:
+            detachedSnapshots: false
+        - name: truenas-iscsi
+          driver: org.democratic-csi.iscsi
+          deletionPolicy: Delete
+          parameters:
+            detachedSnapshots: false
       serviceMonitor:
         create: true
