@@ -9,4 +9,4 @@ spec:
   storageClassName: truenas-nfs
   resources:
     requests:
-      storage: 1TiB
+      storage: 1Ti
