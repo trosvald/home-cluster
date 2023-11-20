@@ -14,7 +14,7 @@ spec:
     name: home-cluster
   dependsOn:
     - name: cluster-apps-rook-ceph-cluster
-    - name: cluster-apps-democratic-csi-nfs
+    - name: cluster-apps-storage-democratic-csi-nfs
     - name: cluster-apps-snapshot-controller
   wait: true
   timeout: 2m
