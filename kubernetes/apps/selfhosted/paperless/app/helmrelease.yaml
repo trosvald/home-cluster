@@ -56,7 +56,7 @@ spec:
               PAPERLESS_OCR_LANGUAGES: ind
               PAPERLESS_OCR_LANGUAGE: ind
               # Configure redis integration
-              PAPERLESS_REDIS: ioredis://e2RiOjEsc2VudGluZWxzOlt7aG9zdDpyZWRpcy1ub2RlLTAucmVkaXMtaGVhZGxlc3MuZGF0YWJhc2Uuc3ZjLmNsdXN0ZXIubG9jYWwscG9ydDoyNjM3OX0se2hvc3Q6cmVkaXMtbm9kZS0xLnJlZGlzLWhlYWRsZXNzLmRhdGFiYXNlLnN2Yy5jbHVzdGVyLmxvY2FsLHBvcnQ6MjYzNzl9LHtob3N0OnJlZGlzLW5vZGUtMi5yZWRpcy1oZWFkbGVzcy5kYXRhYmFzZS5zdmMuY2x1c3Rlci5sb2NhbCxwb3J0OjI2Mzc5fV0sbmFtZTpyZWRpcy1tYXN0ZXJ9Cg==
+              PAPERLESS_REDIS: redis://paperless-redis.selfhosted.svc.cluster.local:6379
               # Configure admin user
               PAPERLESS_ADMIN_USER:
                 valueFrom:
