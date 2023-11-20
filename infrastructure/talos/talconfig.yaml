@@ -42,7 +42,7 @@ nodes:
         routes:
           - network: 0.0.0.0/0
             gateway: 172.16.11.254
-        mtu: 9000
+        mtu: 1500
   # nodeLabels: &masterLabels
   #   topology.kubernetes.io/region: ${clusterName}
   #   topology.kubernetes.io/zone: k8s-master
@@ -67,7 +67,7 @@ nodes:
         routes:
           - network: 0.0.0.0/0
             gateway: 172.16.11.254
-        mtu: 9000
+        mtu: 1500
   # nodeLabels: *masterLabels
     patches:
       - |-
@@ -91,7 +91,7 @@ nodes:
         routes:
           - network: 0.0.0.0/0
             gateway: 172.16.11.254
-        mtu: 9000
+        mtu: 1500
   # nodeLabels: *masterLabels
     patches:
       - |-
@@ -113,21 +113,13 @@ nodes:
     networkInterfaces:
       - interface: eth0
         ignore: true
-      - interface: bond0
-        bond:
-          mode: active-backup
-          miimon: 100
-          deviceSelectors:
-            - hardwareAddr: e4:1d:79:67:75:95
-            - hardwareAddr: e4:1d:79:67:75:96
-        dhcp: false
-        addresses:
-          - 172.16.11.13/24
-        routes:
-          - network: 0.0.0.0/0
-            gateway: 172.16.11.254
-        mtu: 9000
-      # - interface: eth1
+      # - interface: bond0
+      #   bond:
+      #     mode: active-backup
+      #     miimon: 100
+      #     deviceSelectors:
+      #       - hardwareAddr: e4:1d:79:67:75:95
+      #       - hardwareAddr: e4:1d:79:67:75:96
       #   dhcp: false
       #   addresses:
       #     - 172.16.11.13/24
@@ -135,6 +127,14 @@ nodes:
       #     - network: 0.0.0.0/0
       #       gateway: 172.16.11.254
       #   mtu: 1500
+      - interface: eth1
+        dhcp: false
+        addresses:
+          - 172.16.11.13/24
+        routes:
+          - network: 0.0.0.0/0
+            gateway: 172.16.11.254
+        mtu: 1500
         vlans:
           - vlanId: 1613
             dhcp: false
@@ -162,21 +162,13 @@ nodes:
     networkInterfaces:
       - interface: eth0
         ignore: true
-      - interface: bond0
-        bond:
-          mode: active-backup
-          miimon: 100
-          deviceSelectors:
-            - hardwareAddr: e4:1d:85:75:d8:73
-            - hardwareAddr: e4:1d:85:75:d8:74
-        dhcp: false
-        addresses:
-          - 172.16.11.14/24
-        routes:
-          - network: 0.0.0.0/0
-            gateway: 172.16.11.254
-        mtu: 9000
-      # - interface: eth1
+      # - interface: bond0
+      #   bond:
+      #     mode: active-backup
+      #     miimon: 100
+      #     deviceSelectors:
+      #       - hardwareAddr: e4:1d:85:75:d8:73
+      #       - hardwareAddr: e4:1d:85:75:d8:74
       #   dhcp: false
       #   addresses:
       #     - 172.16.11.14/24
@@ -184,6 +176,14 @@ nodes:
       #     - network: 0.0.0.0/0
       #       gateway: 172.16.11.254
       #   mtu: 1500
+      - interface: eth1
+        dhcp: false
+        addresses:
+          - 172.16.11.14/24
+        routes:
+          - network: 0.0.0.0/0
+            gateway: 172.16.11.254
+        mtu: 1500
         vlans:
           - vlanId: 1613
             dhcp: false
@@ -208,21 +208,13 @@ nodes:
     networkInterfaces:
       - interface: eth0
         ignore: true
-      - interface: bond0
-        bond:
-          mode: active-backup
-          miimon: 100
-          deviceSelectors:
-            - hardwareAddr: e4:1d:7a:67:a5:d4
-            - hardwareAddr: e4:1d:7a:67:a5:d5
-        dhcp: false
-        addresses:
-          - 172.16.11.15/24
-        routes:
-          - network: 0.0.0.0/0
-            gateway: 172.16.11.254
-        mtu: 9000
-      # - interface: eth1
+      # - interface: bond0
+      #   bond:
+      #     mode: active-backup
+      #     miimon: 100
+      #     deviceSelectors:
+      #       - hardwareAddr: e4:1d:7a:67:a5:d4
+      #       - hardwareAddr: e4:1d:7a:67:a5:d5
       #   dhcp: false
       #   addresses:
       #     - 172.16.11.15/24
@@ -230,6 +222,14 @@ nodes:
       #     - network: 0.0.0.0/0
       #       gateway: 172.16.11.254
       #   mtu: 1500
+      - interface: eth1
+        dhcp: false
+        addresses:
+          - 172.16.11.15/24
+        routes:
+          - network: 0.0.0.0/0
+            gateway: 172.16.11.254
+        mtu: 1500
         vlans:
           - vlanId: 1613
             dhcp: false
@@ -254,21 +254,13 @@ nodes:
     networkInterfaces:
       - interface: eth0
         ignore: true
-      - interface: bond0
-        bond:
-          mode: active-backup
-          miimon: 100
-          deviceSelectors:
-            - hardwareAddr: ec:0d:9a:00:27:90
-            - hardwareAddr: ec:0d:9a:00:27:91
-        dhcp: false
-        addresses:
-          - 172.16.11.16/24
-        routes:
-          - network: 0.0.0.0/0
-            gateway: 172.16.11.254
-        mtu: 9000
-      # - interface: eth1
+      # - interface: bond0
+      #   bond:
+      #     mode: active-backup
+      #     miimon: 100
+      #     deviceSelectors:
+      #       - hardwareAddr: ec:0d:9a:00:27:90
+      #       - hardwareAddr: ec:0d:9a:00:27:91
       #   dhcp: false
       #   addresses:
       #     - 172.16.11.16/24
@@ -276,6 +268,14 @@ nodes:
       #     - network: 0.0.0.0/0
       #       gateway: 172.16.11.254
       #   mtu: 1500
+      - interface: eth1
+        dhcp: false
+        addresses:
+          - 172.16.11.16/24
+        routes:
+          - network: 0.0.0.0/0
+            gateway: 172.16.11.254
+        mtu: 1500
         vlans:
           - vlanId: 1613
             dhcp: false
