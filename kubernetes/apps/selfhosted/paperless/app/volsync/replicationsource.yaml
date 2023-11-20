@@ -1,0 +1,20 @@
+---
+apiVersion: volsync.backube/v1alpha1
+kind: ReplicationSource
+metadata:
+  name: paperless
+spec:
+  sourcePVC: paperless-data
+  trigger:
+    schedule: "15 */8 * * *"
+  restic:
+    copyMethod: Snapshot
+    repository: paperless-restic-secret
+    cacheStorageClassName: ceph-block
+    cacheCapacity: 1Gi
+    storageClassName: ceph-block
+    volumeSnapshotClassName: csi-ceph-blockpool
+    pruneIntervalDays: 7
+    retain:
+      daily: 7
+      within: 3d
