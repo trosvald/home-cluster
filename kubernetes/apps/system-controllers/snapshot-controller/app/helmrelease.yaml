@@ -52,11 +52,11 @@ spec:
           driver: org.democratic-csi.nfs
           deletionPolicy: Delete
           parameters:
-            detachedSnapshots: false
+            detachedSnapshots: "false"
         - name: truenas-iscsi
           driver: org.democratic-csi.iscsi
           deletionPolicy: Delete
           parameters:
-            detachedSnapshots: false
+            detachedSnapshots: "false"
       serviceMonitor:
         create: true
