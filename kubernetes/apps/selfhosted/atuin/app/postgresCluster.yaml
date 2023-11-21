@@ -19,8 +19,8 @@ spec:
         name: repo1
         s3:
           bucket: "crunchy-postgres"
-          endpoint: "s3.bjw-s.dev"
-          region: "us-east-1"
+          endpoint: "s3.monosense.io"
+          region: "dpkptr-south-rack1"
   patroni:
     dynamicConfiguration:
       synchronous_mode: true
