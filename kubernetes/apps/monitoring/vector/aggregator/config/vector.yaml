@@ -98,7 +98,8 @@ transforms:
       - vyos_firewall_route.firewall
     source: |
       # Parse firewall rule message
-      split_message, split_err = parse_regex(.message, r'^\[.*\].\[(?P<rule>.*?)\](?P<fields>.*)')
+      # split_message, split_err = parse_regex(.message, r'^\[.*\].\[(?P<rule>.*?)\](?P<fields>.*)')
+      split_message, split_err = parse_regex(.message, r'^\[.*\].\[\^ipv4-(?P<rule>.*?)\](?P<fields>.*)')
       if split_err != null {
           abort
       }
