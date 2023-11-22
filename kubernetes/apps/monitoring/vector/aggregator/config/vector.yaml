@@ -66,7 +66,7 @@ transforms:
       r4 = replace(r3, "172.16.11.13", "k8s-w0")
       r5 = replace(r4, "172.16.11.14", "k8s-w1")
       r6 = replace(r5, "172.16.11.15", "k8s-w2")
-      r7 = replace(r6, "172.16.11.15", "k8s-w3")
+      r7 = replace(r6, "172.16.11.16", "k8s-w3")
       .node = r7
 
   service_hostname_transform:
@@ -121,7 +121,7 @@ transforms:
     inputs:
       - vyos_firewall_remap
     route:
-      from_wan: .message.RULE.from_zone == "wan"
+      from_wan: .message.RULE.from_zone == "WAN"
 
   vyos_firewall_geoip_remap:
     type: remap
@@ -166,7 +166,7 @@ sinks:
     labels:
       node: "{{ node }}"
       facility: "{{ facility }}"
-      cluster: "talos"
+      cluster: "cluster-0"
       namespace: "talos:kernel"
 
   talos_service:
@@ -182,7 +182,7 @@ sinks:
     labels:
       node: "{{ node }}"
       talos_service: '{{ "talos-service" }}'
-      cluster: "talos"
+      cluster: "cluster-0"
       namespace: "talos:service"
 
   loki_vyos:
