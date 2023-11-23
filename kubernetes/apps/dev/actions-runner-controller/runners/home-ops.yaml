@@ -3,7 +3,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: arc-home-ops
+  name: arc-home-cluster
 spec:
   interval: 30m
   chart:
@@ -26,8 +26,8 @@ spec:
     keepHistory: false
 
   values:
-    runnerScaleSetName: arc-runner-set-home-ops
-    githubConfigUrl: https://github.com/trosvald/home-ops
+    runnerScaleSetName: arc-runner-set-home-cluster
+    githubConfigUrl: https://github.com/trosvald/home-cluster
     minRunners: 0
     maxRunners: 3
     containerMode:
