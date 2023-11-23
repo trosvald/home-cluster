@@ -1,0 +1,64 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/helmrelease-helm-v2beta1.json
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: arc-home-ops
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: actions-runner-controller-charts/gha-runner-scale-set
+      version: 0.7.0
+      sourceRef:
+        kind: HelmRepository
+        name: actions-runner-controller
+        namespace: flux-system
+      interval: 30m
+  maxHistory: 2
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    remediation:
+      retries: 3
+  uninstall:
+    keepHistory: false
+
+  values:
+    runnerScaleSetName: arc-runner-set-home-ops
+    githubConfigUrl: https://github.com/trosvald/home-ops
+    minRunners: 0
+    maxRunners: 3
+    containerMode:
+      type: "dind"
+    template:
+      spec:
+        containers:
+          - name: runner
+            image: ghcr.io/actions/actions-runner:2.311.0
+            command: ["/home/runner/run.sh"]
+            volumeMounts:
+              - name: cache-volume
+                mountPath: /cache
+        volumes:
+          - name: cache-volume
+            persistentVolumeClaim:
+              claimName: actions-runner-controller-cache
+    controllerServiceAccount:
+      name: actions-runner-controller-gha-rs-controller
+      namespace: dev
+
+  valuesFrom:
+    - kind: Secret
+      name: actions-runner-controller-auth
+      valuesKey: github_app_id
+      targetPath: githubConfigSecret.github_app_id
+    - kind: Secret
+      name: actions-runner-controller-auth
+      valuesKey: github_app_installation_id
+      targetPath: githubConfigSecret.github_app_installation_id
+    - kind: Secret
+      name: actions-runner-controller-auth
+      valuesKey: github_app_private_key
+      targetPath: githubConfigSecret.github_app_private_key
