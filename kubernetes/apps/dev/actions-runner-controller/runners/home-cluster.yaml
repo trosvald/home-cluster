@@ -33,6 +33,13 @@ spec:
           - name: runner
             image: ghcr.io/actions/actions-runner:2.311.0
             command: ["/home/runner/run.sh"]
+            volumeMounts:
+              - name: cache-volume
+                mountPath: /cache
+        volumes:
+          - name: cache-volume
+            persistentVolumeClaim:
+              claimName: actions-runner-controller-cache
 
   valuesFrom:
     - kind: Secret
