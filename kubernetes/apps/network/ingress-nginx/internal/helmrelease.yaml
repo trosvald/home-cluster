@@ -105,4 +105,24 @@ spec:
           memory: 768Mi
 
     defaultBackend:
-      enabled: false
+      # enabled: false
+      enabled: true
+      image:
+        repository: ghcr.io/tarampampam/error-pages
+        tag: 2.24.0
+      replicaCount: 1
+      resources:
+        requests:
+          cpu: 15m
+          memory: 30Mi
+        limits:
+          memory: 35Mi
+      extraEnvs:
+        - name: TEMPLATE_NAME
+          value: connection
+        - name: SHOW_DETAILS
+          value: "false"
+
+    # enable port 22 for gitlab shell
+    tcp:
+      '22': 'dev/gitlab-gitlab-shell:22'

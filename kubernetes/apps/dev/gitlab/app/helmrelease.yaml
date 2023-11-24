@@ -13,7 +13,7 @@ spec:
       version: 7.6.0
       sourceRef:
         kind: HelmRepository
-        name: gitlab-charts
+        name: gitlab
         namespace: flux-system
       interval: 15m
   timeout: 30m
@@ -36,25 +36,27 @@ spec:
 
       initialRootPassword:
         secret: &secret gitlab-secrets
-        key: INITIAL_ROOT_PASSWORD
+        key: GITLAB_ROOT_PASSWORD
 
       hosts:
         domain: &domain monosense.io
         gitlab:
-          name: gitlab.monosense.io
+          name: &ghost gitlab.monosense.io
           https: false
         pages:
-          name: pages.monosense.io
+          name: &phost pages.monosense.io
           https: false
 
       ingress:
         class: external-nginx
         annotations:
-        nginx.ingress.kubernetes.io/enable-global-auth: "false"
+          external-dns.alpha.kubernetes.io/target: ingress-ext.monosense.io
+          nginx.ingress.kubernetes.io/enable-global-auth: "false"
         configureCertmanager: false
         tls:
-          enabled: true
-          secretName: monosense-io-tls
+          - hosts:
+              - *ghost
+              - *phost
 
       certmanager:
         installCRDs: false
@@ -75,14 +77,11 @@ spec:
 
       smtp:
         enabled: true
-#        address: "${SECRET_SMTP_HOST}"
-#        port: ""
-#        user_name: ""
         domain: *domain
         starttls_auto: true
         password:
           secret: *secret
-          key: SMTP_PASSWORD
+          key: GITLAB_SMTP_PASSWORD
 
       praefect:
         enabled: false
@@ -93,13 +92,10 @@ spec:
 
       # Database
       psql:
-        #host: postgres.database
-        #database: gitlab
-        #username: gitlab
         password:
           useSecret: true
-          secret: *secret
-          key: GITLAB_DB_PASSWORD
+          secret: gitlab-pguser-gitlab
+          key: password
 
       redis:
         host: redis.database.svc.cluster.local
@@ -119,7 +115,7 @@ spec:
       gitaly:
         persistence:
           storageClass: ceph-filesystem
-          size: 350Gi
+          size: 150Gi
         resources:
           requests:
             cpu: 80m
@@ -174,7 +170,7 @@ spec:
     gitlab-runner:
       runners:
         config: |
-          concurrent = 20
+          concurrent = 10
           [[runners]]
             [runners.kubernetes]
               cpu_request = "500m"
@@ -193,28 +189,28 @@ spec:
   valuesFrom:
     # DATABASE
     - kind: Secret
-      name: *secret
-      valuesKey: GITLAB_DB_HOST
+      name: gitlab-pguser-gitlab
+      valuesKey: host
       targetPath: global.psql.host
     - kind: Secret
-      name: *secret
-      valuesKey: GITLAB_DB_NAME
+      name: gitlab-pguser-gitlab
+      valuesKey: dbname
       targetPath: global.psql.database
     - kind: Secret
-      name: *secret
-      valuesKey: GITLAB_DB_USERNAME
+      name: gitlab-pguser-gitlab
+      valuesKey: user
       targetPath: global.psql.username
 
     # STMP
     - kind: Secret
       name: *secret
-      valuesKey: SMTP_SERVER
+      valuesKey: GITLAB_SMTP_HOST
       targetPath: global.smtp.address
     - kind: Secret
       name: *secret
-      valuesKey: SMTP_USERNAME
+      valuesKey: GITLAB_SMTP_USER
       targetPath: global.smtp.user_name
     - kind: Secret
       name: *secret
-      valuesKey: SMTP_PORT
+      valuesKey: GITLAB_SMTP_PORT
       targetPath: global.smtp.port
