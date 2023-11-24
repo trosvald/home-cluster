@@ -9,7 +9,7 @@ spec:
   interval: 15m
   chart:
     spec:
-      chart: gitlab
+      chart: gitlab/gitlab
       version: 7.6.0
       sourceRef:
         kind: HelmRepository
