@@ -54,9 +54,7 @@ spec:
           nginx.ingress.kubernetes.io/enable-global-auth: "false"
         configureCertmanager: false
         tls:
-          - hosts:
-              - *ghost
-              - *phost
+          enabled: false
 
       certmanager:
         installCRDs: false
