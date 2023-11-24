@@ -6,6 +6,9 @@ metadata:
   namespace: network
 spec:
   secretName: "monosense-io-tls"
+  secretTemplate:
+    annotations:
+      replicator.v1.mittwald.de/replicate-to: default,dev
   issuerRef:
     name: letsencrypt-production
     kind: ClusterIssuer

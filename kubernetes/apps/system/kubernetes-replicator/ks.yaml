@@ -1,0 +1,15 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/kustomization-kustomize-v1.json
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: cluster-apps-kubernetes-replicator
+  namespace: flux-system
+spec:
+  path: ./kubernetes/apps/system/kubernetes-replicator/app
+  sourceRef:
+    kind: GitRepository
+    name: home-cluster
+  interval: 15m
+  prune: true
+  wait: true
