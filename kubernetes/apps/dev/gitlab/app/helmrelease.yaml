@@ -1,0 +1,220 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: gitlab
+  namespace: dev
+spec:
+  releaseName: gitlab
+  interval: 15m
+  chart:
+    spec:
+      chart: gitlab
+      version: 7.6.0
+      sourceRef:
+        kind: HelmRepository
+        name: gitlab-charts
+        namespace: flux-system
+      interval: 15m
+  timeout: 30m
+  maxHistory: 2
+  install:
+    createNamespace: true
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  uninstall:
+    keepHistory: false
+  values:
+    global:
+      edition: ee
+
+      time_zone: Asia/Jakarta
+
+      initialRootPassword:
+        secret: &secret gitlab-secrets
+        key: INITIAL_ROOT_PASSWORD
+
+      hosts:
+        domain: &domain monosense.io
+        gitlab:
+          name: gitlab.monosense.io
+          https: false
+        pages:
+          name: pages.monosense.io
+          https: false
+
+      ingress:
+        class: external-nginx
+        annotations:
+        nginx.ingress.kubernetes.io/enable-global-auth: "false"
+        configureCertmanager: false
+        tls:
+          enabled: true
+          secretName: monosense-io-tls
+
+      certmanager:
+        installCRDs: false
+        install: false
+        rbac:
+          create: false
+
+      kas:
+        enabled: false
+
+      pages:
+        enabled: true
+
+      email:
+        display_name: GitLab
+        from: info@monosense.io
+        reply_to: "no_reply@monosense.io"
+
+      smtp:
+        enabled: true
+#        address: "${SECRET_SMTP_HOST}"
+#        port: ""
+#        user_name: ""
+        domain: *domain
+        starttls_auto: true
+        password:
+          secret: *secret
+          key: SMTP_PASSWORD
+
+      praefect:
+        enabled: false
+        virtualStorages:
+          - name: default
+            gitalyReplicas: 3
+            maxUnavailable: 1
+
+      # Database
+      psql:
+        #host: postgres.database
+        #database: gitlab
+        #username: gitlab
+        password:
+          useSecret: true
+          secret: *secret
+          key: GITLAB_DB_PASSWORD
+
+      redis:
+        host: redis.database.svc.cluster.local
+        serviceName: redis-master
+        port: 6379
+        sentinels:
+          - host: redis-node-0.redis-headless.database.svc.cluster.local
+            port: 26379
+          - host: redis-node-1.redis-headless.database.svc.cluster.local
+            port: 26379
+          - host: redis-node-2.redis-headless.database.svc.cluster.local
+            port: 26379
+        auth:
+          enabled: false
+
+    gitlab:
+      gitaly:
+        persistence:
+          storageClass: ceph-filesystem
+          size: 350Gi
+        resources:
+          requests:
+            cpu: 80m
+            memory: 340M
+          limits:
+            cpu: 1800m
+
+      webservice:
+        minReplicas: 1
+        maxReplicas: 1
+        workerProcesses: 2
+        resources:
+          limits:
+            memory: 3.0Gi # roughly, 1.5GB/worker
+          requests:
+            cpu: "1.1" # requests.cpu <= workerProcesses
+            memory: 2.50Gi # roughly, 1.25GB/worker
+
+      sidekiq:
+        minReplicas: 1
+        maxReplicas: 1
+        resources:
+          requests:
+            cpu: 100m
+            memory: 600M
+
+      gitlab-shell:
+        minReplicas: 1
+        maxReplicas: 1
+
+      gitlab-pages:
+        # The default requests are massive for a static server
+        resources:
+          requests:
+            cpu: 50m
+            memory: 50Mi
+
+    # Disable things we handle by ourselves
+    certmanager:
+      install: false
+    nginx-ingress:
+      enabled: false
+    postgresql:
+      install: false
+    redis:
+      install: false
+    prometheus:
+      install: false
+    grafana:
+      enabled: false
+
+    gitlab-runner:
+      runners:
+        config: |
+          concurrent = 20
+          [[runners]]
+            [runners.kubernetes]
+              cpu_request = "500m"
+              cpu_limit = "1"
+              memory_request = "200Mi"
+              memory_limit = "1Gi"
+              service_cpu_request = "100m"
+              service_cpu_limit = "1"
+              service_memory_request = "50Mi"
+              service_memory_limit = "1Gi"
+              helper_cpu_request = "5m"
+              helper_cpu_limit = "500m"
+              helper_memory_request = "50Mi"
+              helper_memory_limit = "200Mi"
+
+  valuesFrom:
+    # DATABASE
+    - kind: Secret
+      name: *secret
+      valuesKey: GITLAB_DB_HOST
+      targetPath: global.psql.host
+    - kind: Secret
+      name: *secret
+      valuesKey: GITLAB_DB_NAME
+      targetPath: global.psql.database
+    - kind: Secret
+      name: *secret
+      valuesKey: GITLAB_DB_USERNAME
+      targetPath: global.psql.username
+
+    # STMP
+    - kind: Secret
+      name: *secret
+      valuesKey: SMTP_SERVER
+      targetPath: global.smtp.address
+    - kind: Secret
+      name: *secret
+      valuesKey: SMTP_USERNAME
+      targetPath: global.smtp.user_name
+    - kind: Secret
+      name: *secret
+      valuesKey: SMTP_PORT
+      targetPath: global.smtp.port
