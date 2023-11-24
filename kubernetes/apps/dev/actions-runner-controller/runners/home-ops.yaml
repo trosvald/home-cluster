@@ -4,17 +4,17 @@ apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
   name: arc-home-cluster
+  namespace: dev
 spec:
   interval: 30m
   chart:
     spec:
-      chart: actions-runner-controller-charts/gha-runner-scale-set
+      chart: gha-runner-scale-set
       version: 0.7.0
       sourceRef:
         kind: HelmRepository
         name: actions-runner-controller
         namespace: flux-system
-      interval: 30m
   maxHistory: 2
   install:
     remediation:
@@ -24,14 +24,13 @@ spec:
       retries: 3
   uninstall:
     keepHistory: false
-
   values:
-    runnerScaleSetName: arc-runner-set-home-cluster
+    runnerScaleSetName: home-cluster
     githubConfigUrl: https://github.com/trosvald/home-cluster
     minRunners: 0
     maxRunners: 3
     containerMode:
-      type: "dind"
+      type: dind
     template:
       spec:
         containers:
@@ -48,17 +47,16 @@ spec:
     controllerServiceAccount:
       name: gha-runner-scale-set
       namespace: dev
-
   valuesFrom:
     - kind: Secret
-      name: actions-runner-controller-auth
+      name: actions-runner-controller-secret
       valuesKey: github_app_id
       targetPath: githubConfigSecret.github_app_id
     - kind: Secret
-      name: actions-runner-controller-auth
+      name: actions-runner-controller-secret
       valuesKey: github_app_installation_id
       targetPath: githubConfigSecret.github_app_installation_id
     - kind: Secret
-      name: actions-runner-controller-auth
+      name: actions-runner-controller-secret
       valuesKey: github_app_private_key
       targetPath: githubConfigSecret.github_app_private_key
