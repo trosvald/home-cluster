@@ -258,6 +258,7 @@ spec:
               memory_request = "200Mi"
               memory_limit = "1Gi"
               service_cpu_request = "100m"
+              privileged = "true"
               service_cpu_limit = "1"
               service_memory_request = "50Mi"
               service_memory_limit = "1Gi"
