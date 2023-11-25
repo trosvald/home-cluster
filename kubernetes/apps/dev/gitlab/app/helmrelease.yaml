@@ -79,9 +79,6 @@ spec:
           storageClass: truenas-iscsi
           size: 80Gi
 
-      registry:
-        bucket: gitlab-registry
-
       appConfig:
         omniauth:
           enabled: true
@@ -183,6 +180,11 @@ spec:
       #       port: 26379
       #   auth:
       #     enabled: false
+    registry:
+      enabled: true
+      storage:
+        secret: gitlab-registry-s3-secrets
+        key: config
 
     gitlab:
       gitaly:
