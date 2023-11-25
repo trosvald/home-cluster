@@ -47,6 +47,9 @@ spec:
         registry:
           name: gitlab-registry.monosense.io
           https: true
+        minio:
+          name: minio.monosense.io
+          https: true
 
       ingress:
         class: external-nginx
@@ -71,61 +74,63 @@ spec:
         enabled: true
 
       minio:
-        enabled: false
+        enabled: true
+        persistence:
+          storageClass: truenas-iscsi
+          size: 80Gi
 
       registry:
         bucket: gitlab-registry
 
-      appConfig:
-        object_stor:
-          enabled: true
-          connection:
-            secret: gitlab-rails-s3-secrets
-        lfs:
-          enabled: true
-          bucket: gitlab-lfs
-          connection:
-            secret: gitlab-rails-s3-secrets
-        artifacts:
-          enabled: true
-          bucket: gitlab-artifacts
-          connection:
-            secret: gitlab-rails-s3-secrets
-        uploads:
-          enabled: true
-          bucket: gitlab-uploads
-          connection:
-            secret: gitlab-rails-s3-secrets
-        packages:
-          enabled: true
-          bucket: gitlab-packages
-          connection:
-            secret: gitlab-rails-s3-secrets
-        externalDiffs:
-          enabled: true
-          bucket: gitlab-mr-diffs
-          connection:
-            secret: gitlab-rails-s3-secrets
-        terraformState:
-          enabled: true
-          bucket: gitlab-terraform-state
-          connection:
-            secret: gitlab-rails-s3-secrets
-        ciSecureFiles:
-          enabled: true
-          bucket: gitlab-ci-secure-files
-          connection:
-            secret: gitlab-rails-s3-secrets
-        dependencyProxy:
-          enabled: true
-          bucket: gitlab-dependency-proxy
-          connection:
-            secret: gitlab-rails-s3-secrets
-        # Backups
+      # appConfig:
+      #   object_stor:
+      #     enabled: true
+      #     connection:
+      #       secret: gitlab-rails-s3-secrets
+      #   lfs:
+      #     enabled: true
+      #     bucket: gitlab-lfs
+      #     connection:
+      #       secret: gitlab-rails-s3-secrets
+      #   artifacts:
+      #     enabled: true
+      #     bucket: gitlab-artifacts
+      #     connection:
+      #       secret: gitlab-rails-s3-secrets
+      #   uploads:
+      #     enabled: true
+      #     bucket: gitlab-uploads
+      #     connection:
+      #       secret: gitlab-rails-s3-secrets
+      #   packages:
+      #     enabled: true
+      #     bucket: gitlab-packages
+      #     connection:
+      #       secret: gitlab-rails-s3-secrets
+      #   externalDiffs:
+      #     enabled: true
+      #     bucket: gitlab-mr-diffs
+      #     connection:
+      #       secret: gitlab-rails-s3-secrets
+      #   terraformState:
+      #     enabled: true
+      #     bucket: gitlab-terraform-state
+      #     connection:
+      #       secret: gitlab-rails-s3-secrets
+      #   ciSecureFiles:
+      #     enabled: true
+      #     bucket: gitlab-ci-secure-files
+      #     connection:
+      #       secret: gitlab-rails-s3-secrets
+      #   dependencyProxy:
+      #     enabled: true
+      #     bucket: gitlab-dependency-proxy
+      #     connection:
+      #       secret: gitlab-rails-s3-secrets
+
         backups:
           bucket: gitlab-backup
           tmpBucket: gitlab-tmp
-
 
       email:
         display_name: GitLab
@@ -171,8 +176,8 @@ spec:
     gitlab:
       gitaly:
         persistence:
-          storageClass: ceph-filesystem
-          size: 150Gi
+          storageClass: truenas-iscsi
+          size: 200Gi
         resources:
           requests:
             cpu: 80m
