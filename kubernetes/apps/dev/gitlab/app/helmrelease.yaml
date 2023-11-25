@@ -93,7 +93,7 @@ spec:
           blockAutoCreatedUsers: false
           autoLinkSamlUser: true
           providers:
-            - secrets: gitlab-authentik-saml
+            - secret: gitlab-authentik-saml
       #   object_stor:
       #     enabled: true
       #     connection:
