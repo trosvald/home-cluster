@@ -94,7 +94,6 @@ spec:
           autoLinkSamlUser: true
           providers:
             - secrets: gitlab-authentik-saml
-              key: provider
       #   object_stor:
       #     enabled: true
       #     connection:
