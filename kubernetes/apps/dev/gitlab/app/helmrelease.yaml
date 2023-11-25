@@ -117,7 +117,10 @@ spec:
           connection:
             secret: gitlab-rails-s3-secrets
         dependencyProxy:
-          enabled: false
+          enabled: true
+          bucket: gitlab-dependency-proxy
+          connection:
+            secret: gitlab-rails-s3-secrets
         # Backups
         backups:
           bucket: gitlab-backup
