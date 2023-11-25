@@ -151,19 +151,19 @@ spec:
           secret: gitlab-pguser-gitlab
           key: password
 
-      redis:
-        host: redis.database.svc.cluster.local
-        serviceName: redis-master
-        port: 6379
-        sentinels:
-          - host: redis-node-0.redis-headless.database.svc.cluster.local
-            port: 26379
-          - host: redis-node-1.redis-headless.database.svc.cluster.local
-            port: 26379
-          - host: redis-node-2.redis-headless.database.svc.cluster.local
-            port: 26379
-        auth:
-          enabled: false
+      # redis:
+      #   host: redis.database.svc.cluster.local
+      #   serviceName: redis-master
+      #   port: 6379
+      #   sentinels:
+      #     - host: redis-node-0.redis-headless.database.svc.cluster.local
+      #       port: 26379
+      #     - host: redis-node-1.redis-headless.database.svc.cluster.local
+      #       port: 26379
+      #     - host: redis-node-2.redis-headless.database.svc.cluster.local
+      #       port: 26379
+      #   auth:
+      #     enabled: false
 
     gitlab:
       gitaly:
@@ -222,7 +222,7 @@ spec:
     postgresql:
       install: false
     redis:
-      install: false
+      install: true
     prometheus:
       install: false
     grafana:
