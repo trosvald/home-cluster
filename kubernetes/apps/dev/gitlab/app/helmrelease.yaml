@@ -88,8 +88,8 @@ spec:
           allowSingleSignOn: ['saml']
           syncEmailFromProvider: 'saml'
           syncProfileFromProvider: ['saml']
-          syncProfileAttributes: ['email', 'first_name', 'nickname']
-          autoSignInWithProvider: 'saml'
+          syncProfileAttributes: ['email']
+          #autoSignInWithProvider: 'saml'
           blockAutoCreatedUsers: false
           autoLinkSamlUser: true
           providers:
