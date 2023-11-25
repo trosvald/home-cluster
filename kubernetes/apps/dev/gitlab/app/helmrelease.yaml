@@ -82,7 +82,19 @@ spec:
       registry:
         bucket: gitlab-registry
 
-      # appConfig:
+      appConfig:
+        omniauth:
+          enabled: true
+          allowSingleSignOn: ['saml']
+          syncEmailFromProvider: 'saml'
+          syncProfileFromProvider: ['saml']
+          syncProfileAttributes: ['email']
+          autoSignInWithProvider: 'saml'
+          blockAutoCreatedUsers: false
+          autoLinkSamlUser: true
+          providers:
+            - secrets: gitlab-authentik-saml
+              key: provider
       #   object_stor:
       #     enabled: true
       #     connection:
