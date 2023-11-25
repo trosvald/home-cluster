@@ -32,8 +32,6 @@ spec:
     global:
       edition: ee
 
-      time_zone: Asia/Jakarta
-
       initialRootPassword:
         secret: &secret gitlab-secrets
         key: GITLAB_ROOT_PASSWORD
@@ -41,11 +39,14 @@ spec:
       hosts:
         domain: &domain monosense.io
         gitlab:
-          name: &ghost gitlab.monosense.io
-          https: false
+          name: gitlab.monosense.io
+          https: true
         pages:
-          name: &phost pages.monosense.io
-          https: false
+          name: pages.monosense.io
+          https: true
+        registry:
+          name: gitlab-registry.monosense.io
+          https: true
 
       ingress:
         class: external-nginx
@@ -54,7 +55,8 @@ spec:
           nginx.ingress.kubernetes.io/enable-global-auth: "false"
         configureCertmanager: false
         tls:
-          enabled: false
+          enabled: true
+          secretName: monosense-io-tls
 
       certmanager:
         installCRDs: false
@@ -67,6 +69,22 @@ spec:
 
       pages:
         enabled: true
+
+      minio:
+        enabled: false
+
+      registry:
+        bucket: gitlab-registry
+
+      appConfig:
+        object_stor:
+          enabled: true
+          connection:
+            secret: gitlab-rails-s3-secrets
+        backups:
+          bucket: gitlab-backup
+          tmpBucket: gitlab-tmp
+
 
       email:
         display_name: GitLab
@@ -150,6 +168,13 @@ spec:
           requests:
             cpu: 50m
             memory: 50Mi
+
+      toolbox:
+        backups:
+          objectStorage:
+            config:
+              secret: gitlab-backup-s3-secrets
+              key: config
 
     # Disable things we handle by ourselves
     certmanager:

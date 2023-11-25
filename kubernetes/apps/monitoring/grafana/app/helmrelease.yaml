@@ -135,7 +135,7 @@ spec:
         enabled: false
       auth.generic_oauth:
         enabled: true
-        name: Authentik
+        name: Monosense SSO
         icon: signin
         scopes: openid profile email
         empty_scopes: false
@@ -198,6 +198,7 @@ spec:
       - vonage-status-panel
       - grafana-worldmap-panel
       - grafana-clock-panel
+      - redis-datasource
 
     rbac:
       pspEnabled: false
