@@ -81,6 +81,44 @@ spec:
           enabled: true
           connection:
             secret: gitlab-rails-s3-secrets
+        lfs:
+          enabled: true
+          bucket: gitlab-lfs
+          connection:
+            secret: gitlab-rails-s3-secrets
+        artifacts:
+          enabled: true
+          bucket: gitlab-artifacts
+          connection:
+            secret: gitlab-rails-s3-secrets
+        uploads:
+          enabled: true
+          bucket: gitlab-uploads
+          connection:
+            secret: gitlab-rails-s3-secrets
+        packages:
+          enabled: true
+          bucket: gitlab-packages
+          connection:
+            secret: gitlab-rails-s3-secrets
+        externalDiffs:
+          enabled: true
+          bucket: gitlab-mr-diffs
+          connection:
+            secret: gitlab-rails-s3-secrets
+        terraformState:
+          enabled: true
+          bucket: gitlab-terraform-state
+          connection:
+            secret: gitlab-rails-s3-secrets
+        ciSecureFiles:
+          enabled: true
+          bucket: gitlab-ci-secure-files
+          connection:
+            secret: gitlab-rails-s3-secrets
+        dependencyProxy:
+          enabled: false
+        # Backups
         backups:
           bucket: gitlab-backup
           tmpBucket: gitlab-tmp
