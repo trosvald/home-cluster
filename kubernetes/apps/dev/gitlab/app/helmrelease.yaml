@@ -80,6 +80,9 @@ spec:
           size: 80Gi
 
       appConfig:
+        backups:
+          bucket: gitlab-backup
+          tmpBucket: gitlab-tmp
         omniauth:
           enabled: true
           allowSingleSignOn: ['saml']
@@ -135,11 +138,6 @@ spec:
       #     bucket: gitlab-dependency-proxy
       #     connection:
       #       secret: gitlab-rails-s3-secrets
-
-        backups:
-          bucket: gitlab-backup
-          tmpBucket: gitlab-tmp
-
       email:
         display_name: GitLab
         from: info@monosense.io
