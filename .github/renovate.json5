@@ -14,7 +14,7 @@
     "local>trosvald/home-cluster//.github/renovate/labels.json5",
   ],
   platform: "github",
-  username: "trosvald[bot]",
+  username: "trosvald",
   gitAuthor: "trosvald <647255+trosvald[bot]@users.noreply.github.com>",
   ignorePaths: ["^archive/**"],
   flux: {
