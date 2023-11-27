@@ -16,6 +16,9 @@ jobs:
     name: Lint
     runs-on: arc-runner-set-home-cluster
     #runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      pull-requests: write
     steps:
       - name: Checkout
         uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
@@ -58,7 +61,7 @@ jobs:
               )
             }}
           COPYPASTE_JSCPD_CONFIG_FILE: .ci/jscpd/jscpd.json
-          KUBERNETES_DIRECTORY: k8s
+          KUBERNETES_DIRECTORY: kubernetes/apps
           KUBERNETES_KUBEVAL_ARGUMENTS: --ignore-missing-schemas
           KUBERNETES_KUBEVAL_FILTER_REGEX_INCLUDE: "(kubernetes)"
           MARKDOWN_MARKDOWNLINT_CONFIG_FILE: .github/linters/markdownlint.config.yaml
