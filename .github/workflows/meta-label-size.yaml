@@ -9,7 +9,7 @@ on: # yamllint disable-line rule:truthy
 jobs:
   label-size:
     name: Label Size
-    runs-on: self-hosted-linux
+    runs-on: arc-runner-set-home-cluster
     #runs-on: ubuntu-latest
     steps:
       - name: Generate Token
