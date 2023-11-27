@@ -3,9 +3,6 @@
   extends: [
     "github>trosvald/renovate-config",
     "github>trosvald/renovate-config:automerge-github-actions",
-    "github>trosvald/renovate-config:automerge-galaxy-collections",
-    "github>trosvald/renovate-config:automerge-galaxy-roles",
-    "github>trosvald/renovate-config:automerge-terraform-providers",
     "local>trosvald/home-cluster//.github/renovate/allowedVersions.json5",
     "local>trosvald/home-cluster//.github/renovate/autoMerge.json5",
     "local>trosvald/home-cluster//.github/renovate/commitMessage.json5",
