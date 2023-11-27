@@ -29,7 +29,7 @@ jobs:
         uses: allenporter/flux-local/action/diff@3.2.0
         id: diff
         with:
-          sources: home-ops-kubernetes
+          sources: home-cluster
           path: "${{ matrix.path }}"
           resource: "${{ matrix.resource }}"
 
