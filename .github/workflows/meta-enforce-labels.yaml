@@ -8,7 +8,8 @@ on: # yamllint disable-line rule:truthy
 jobs:
   enforce-label:
     name: Enforce PR labels
-    runs-on: ubuntu-latest
+    runs-on: arc-runner-set-home-cluster
+    #runs-on: ubuntu-latest
     steps:
       - uses: yogevbd/enforce-label-action@2.2.2
         with:

@@ -9,7 +9,8 @@ on:
 jobs:
   flux-diff:
     name: Flux Diff
-    runs-on: ubuntu-latest
+    #runs-on: ubuntu-latest
+    runs-on: arc-runner-set-home-cluster
     permissions:
       pull-requests: write
     strategy:
@@ -28,7 +29,7 @@ jobs:
         uses: allenporter/flux-local/action/diff@3.2.0
         id: diff
         with:
-          sources: home-ops-kubernetes
+          sources: home-cluster
           path: "${{ matrix.path }}"
           resource: "${{ matrix.resource }}"
 
