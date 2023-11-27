@@ -14,8 +14,8 @@
     "local>trosvald/home-cluster//.github/renovate/labels.json5",
   ],
   platform: "github",
-  username: "trosvald",
-  gitAuthor: "trosvald <647255+trosvald[bot]@users.noreply.github.com>",
+  username: "monosense-arc[bot]",
+  gitAuthor: "monosense-arc <647255+monosense-arc[bot]@users.noreply.github.com>",
   ignorePaths: ["^archive/**"],
   flux: {
     fileMatch: ["^kubernetes/.+\\.ya?ml$"],
