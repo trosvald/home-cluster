@@ -9,7 +9,8 @@ on:
 jobs:
   flux-diff:
     name: Flux Diff
-    runs-on: ubuntu-latest
+    #runs-on: ubuntu-latest
+    runs-on: self-hosted-linux
     permissions:
       pull-requests: write
     strategy:
