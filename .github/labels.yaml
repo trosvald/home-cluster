@@ -1,11 +1,7 @@
 ---
 # Area
-- name: area/ansible
-  color: "72ccf3"
-  description: >-
-    Changes made in the ansible directory
-- name: area/github
-  color: "72ccf3"
+- name: area/ci
+  color: "1f1cd4"
   description: >-
     Changes made in the github directory
 - name: area/taskfiles
@@ -13,15 +9,15 @@
   description: >-
     Changes made in the taskfiles directory
 - name: area/kubernetes
-  color: "72ccf3"
+  color: "d41c1c"
   description: >-
     Changes made in the kubernetes directory
 - name: area/talos
-  color: "72ccf3"
+  color: "#1cd428"
   description: >-
     Changes made in the talos directory
 - name: area/terraform
-  color: "72ccf3"
+  color: "d48a1c"
   description: >-
     Changes made in the terraform directory
 # Renovate
