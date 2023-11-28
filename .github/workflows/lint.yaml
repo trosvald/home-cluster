@@ -14,8 +14,8 @@ concurrency:
 jobs:
   build:
     name: Lint
-    #runs-on: arc-runner-set-home-cluster
-    runs-on: ubuntu-latest
+    runs-on: arc-runner-set-home-cluster
+    # runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
@@ -63,7 +63,7 @@ jobs:
           KUBERNETES_KUBEVAL_FILTER_REGEX_INCLUDE: "(kubernetes)"
           MARKDOWN_MARKDOWNLINT_CONFIG_FILE: .github/linters/markdownlint.config.yaml
           MARKDOWN_MARKDOWNLINT_RULES_PATH: .github/
-          #ACTION_ACTIONLINT_CONFIG_FILE: .github/actionlint.yaml
+          ACTION_ACTIONLINT_CONFIG_FILE: .github/actionlint.yaml
           PYTHON_FLAKE8_CONFIG_FILE: .github/linters/.flake8
           YAML_YAMLLINT_CONFIG_FILE: .ci/yamllint/.yamllint.yaml
           YAML_PRETTIER_CONFIG_FILE: .ci/prettier/.prettierrc.yaml
