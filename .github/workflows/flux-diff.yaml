@@ -28,6 +28,11 @@ jobs:
       - name: Setup flux
         uses: fluxcd/flux2/action@a18d4f345021182d6516bf3e8e00210567f46ab5
 
+      - name: Setup kustomize
+        uses: multani/action-setup-kustomize@v1
+        with:
+          version: 5.2.1
+
       - name: Diff Resources
         uses: allenporter/flux-local/action/diff@3.2.0
         id: diff
