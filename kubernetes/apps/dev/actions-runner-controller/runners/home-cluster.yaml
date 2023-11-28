@@ -21,8 +21,8 @@ spec:
 
     githubConfigUrl: https://github.com/trosvald/home-cluster
 
-    minRunners: 0
-    maxRunners: 3
+    minRunners: 1
+    maxRunners: 5
 
     containerMode:
       type: "dind"
@@ -31,7 +31,7 @@ spec:
       spec:
         containers:
           - name: runner
-            image: ghcr.io/actions/actions-runner:2.311.0
+            image: ghcr.io/onedr0p/github-actions-runner:rolling@sha256:e24bb8f3d809b706cd740c47f688dcecbf3886f3ac819d61b7b1f5644a2f091d
             command: ["/home/runner/run.sh"]
             volumeMounts:
               - name: cache-volume
