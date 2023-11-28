@@ -189,8 +189,10 @@ sinks:
   loki_vyos:
     type: loki
     inputs:
-      - vyos_firewall_wan_route._unmatched
-      - vyos_firewall_geoip_remap
+      - vyos_firewall_route
+      - vyos_firewall_remap
+      # - vyos_firewall_wan_route._unmatched
+      # - vyos_firewall_geoip_remap
     endpoint: http://loki-gateway.monitoring.svc.cluster.local
     encoding:
       codec: json
