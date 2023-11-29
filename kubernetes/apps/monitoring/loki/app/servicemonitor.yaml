@@ -4,7 +4,7 @@ apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
   name: &app loki
-  namespace: monitor
+  namespace: monitoring
   labels: &labels
     app.kubernetes.io/component: read
     app.kubernetes.io/instance: *app
@@ -12,7 +12,7 @@ metadata:
 spec:
   namespaceSelector:
     matchNames:
-      - monitor
+      - monitoring
   selector:
     matchExpressions:
       - {key: app.kubernetes.io/component, operator: In, values: [read]}
