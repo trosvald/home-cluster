@@ -112,7 +112,7 @@ transforms:
           abort
       }
       # Add more information about the triggered rule
-      .message.RULE, parse_err = parse_regex(split_message.rule, r'^(?P<from_zone>\w+)-(?P<to_zone>\w+)-(?P<id>\w+)-(?P<action>\w+)$')
+      .message.RULE, parse_err = parse_regex(split_message.rule, r'^(?P<type>\w+)-(?P<from_zone>\w+)-(?P<to_zone>\w+)-(?P<id>\w+)-(?P<action>\w+)$')
       if parse_err != null {
           abort
       }
@@ -122,7 +122,7 @@ transforms:
     inputs:
       - vyos_firewall_remap
     route:
-      from_wan: .message.RULE.from_zone == "ipv4-WAN"
+      from_wan: .message.RULE.from_zone == "WAN"
 
   vyos_firewall_geoip_remap:
     type: remap
