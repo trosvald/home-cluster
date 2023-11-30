@@ -12,7 +12,7 @@ spec:
   issuerRef:
     name: letsencrypt-production
     kind: ClusterIssuer
-  commonName: "page.monosense.io"
+  commonName: "pages.monosense.io"
   dnsNames:
-    - "page.monosense.io"
-    - "*.page.monosense.io"
+    - "pages.monosense.io"
+    - "*.pages.monosense.io"
