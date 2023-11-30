@@ -9,3 +9,4 @@ resources:
   # - ./immich/ks.yaml
   # - ./node-red/ks.yaml
   # - ./paperless/ks.yaml
+  - ./piped/ks.yaml

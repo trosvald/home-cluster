@@ -1,0 +1,94 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/ishioni/CRDs-catalog/main/helm.toolkit.fluxcd.io/helmrelease_v2beta1.json
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: piped
+  namespace: selfhosted
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: piped
+      version: 4.1.0
+      sourceRef:
+        kind: HelmRepository
+        name: piped
+        namespace: flux-system
+  maxHistory: 3
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  uninstall:
+    keepHistory: false
+  valuesFrom:
+    - kind: Secret
+      name: piped-pguser-piped
+      valuesKey: user
+      targetPath: backend.config.database.username
+    - kind: Secret
+      name: piped-pguser-piped
+      valuesKey: password
+      targetPath: backend.config.database.password
+  values:
+    postgresql:
+      enabled: false
+    global:
+      annotations:
+        secret.reloader.stakater.com/reload: &secret piped-secret
+    frontend:
+      image:
+        repository: docker.io/1337kavin/piped-frontend
+      env:
+        BACKEND_HOSTNAME: &pipedapi pipedapi.monosense.io
+    backend:
+      image:
+        repository: docker.io/1337kavin/piped
+      config:
+        PORT: 8080
+        HTTP_WORKERS: 2
+        PROXY_PART: https://ytproxy.monosense.io
+        COMPROMISED_PASSWORD_CHECK: true
+        DISABLE_REGISTRATION: false
+        database:
+          driver_class: org.postgresql.Driver
+          dialect: org.hibernate.dialect.PostgreSQLDialect
+          connection_url: jdbc:postgresql://piped-primary.selfhosted.svc:5432/piped
+    ingress:
+      main:
+        enabled: true
+        ingressClassName: internal-nginx
+        hosts:
+          - host: &host "piped.monosense.io"
+            paths:
+              - path: /
+        tls:
+          - hosts:
+              - *host
+            # secretName: monosense-io-tls
+      backend:
+        enabled: true
+        ingressClassName: internal-nginx
+        hosts:
+          - host: *pipedapi
+            paths:
+              - path: "/"
+        tls:
+          - hosts:
+              - *pipedapi
+            # secretName: monosense-io-tls
+      ytproxy:
+        enabled: true
+        ingressClassName: internal-nginx
+        hosts:
+          - host: &proxy ytproxy.monosense.io
+            paths:
+              - path: "/"
+        tls:
+          - hosts:
+              - *proxy
+            # secretName: monosense-io-tls
