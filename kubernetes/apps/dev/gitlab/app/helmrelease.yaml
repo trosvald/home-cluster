@@ -220,6 +220,10 @@ spec:
         maxReplicas: 1
 
       gitlab-pages:
+        ingress:
+          tls:
+            enabled: true
+            secretName: page-monosense-io-tls
         # The default requests are massive for a static server
         resources:
           requests:
