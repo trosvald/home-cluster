@@ -26,7 +26,7 @@ jobs:
           private_key: ${{ secrets.TROSVALD_APP_PRIVATE_KEY }}
 
       - name: Setup flux
-        uses: fluxcd/flux2/action@f20fe7616885f22f349001f2ec7ddafb431c9401
+        uses: fluxcd/flux2/action@62ac960273a88773947dd5784689631a210ebb9c
 
       - name: Setup kustomize
         uses: multani/action-setup-kustomize@v1
