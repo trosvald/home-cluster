@@ -3,7 +3,7 @@ clusterName: ${clusterName}
 endpoint: "https://${clusterName}.${domainName}:6443"
 
 talosVersion: v1.5.5
-kubernetesVersion: 1.28.3
+kubernetesVersion: 1.28.4
 
 # Image URL rendered on https://factory.talos.dev
 # customization:
@@ -360,7 +360,9 @@ controlPlane:
         time:
           disabled: false
           servers:
-            - 172.16.10.254
+            - ntp.monosense.io
+            - time.google.co
+            - time.cloudflare.com
     - |-
       - op: remove
         path: /cluster/apiServer/admissionControl
@@ -418,4 +420,6 @@ worker:
         time:
           disabled: false
           servers:
-            - 172.16.10.254
+            - ntp.monosense.io
+            - time.google.co
+            - time.cloudflare.com
