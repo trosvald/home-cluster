@@ -21,12 +21,15 @@ resources:
   - kubernetes-sigs-external-dns.yaml
   - kubernetes-sigs-metrics-server.yaml
   - kubernetes-sigs-nfd.yaml
+  - kubernetes-sigs-nfs-subdir.yaml
   - metallb.yaml
+  - mittwald.yaml
   - piraeus.yaml
   - postfinance.yaml
   - prometheus-community.yaml
   - rook-ceph.yaml
   - stakater.yaml
+  - synology-csi.yaml
   - tf-controller.yaml
   - vector.yaml
   - weave-gitops.yaml

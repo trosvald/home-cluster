@@ -3,7 +3,7 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: cluster-apps-volsync
+  name: production-volsync
   namespace: flux-system
 spec:
   interval: 10m
@@ -13,8 +13,8 @@ spec:
     kind: GitRepository
     name: home-cluster
   dependsOn:
-    - name: cluster-apps-rook-ceph-cluster
-    - name: cluster-apps-storage-democratic-csi-nfs
-    - name: cluster-apps-snapshot-controller
+    - name: production-rook-ceph-cluster
+    - name: production-storage-democratic-csi-nfs
+    - name: production-snapshot-controller
   wait: true
   timeout: 2m

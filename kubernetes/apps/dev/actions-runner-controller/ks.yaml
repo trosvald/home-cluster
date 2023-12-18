@@ -3,7 +3,7 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: cluster-apps-actions-runner-controller
+  name: production-actions-runner-controller
   namespace: flux-system
 spec:
   targetNamespace: dev
@@ -18,14 +18,14 @@ spec:
     name: home-cluster
   wait: true
   dependsOn:
-    - name: cluster-apps-external-secrets-stores
+    - name: production-external-secrets-stores
 
 ---
 # yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/kustomization-kustomize-v1.json
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: cluster-apps-actions-runner-controller-runners
+  name: production-actions-runner-controller-runners
   namespace: flux-system
 spec:
   targetNamespace: dev
@@ -40,5 +40,5 @@ spec:
     name: home-cluster
   wait: false
   dependsOn:
-    - name: cluster-apps-actions-runner-controller
-    - name: cluster-apps-rook-ceph-cluster
+    - name: production-actions-runner-controller
+    - name: production-rook-ceph-cluster

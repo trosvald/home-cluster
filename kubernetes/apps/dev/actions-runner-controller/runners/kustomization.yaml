@@ -3,3 +3,4 @@ kind: Kustomization
 resources:
   - ./home-cluster.yaml
   - ./vyos-config.yaml
+  - ./infra-cluster.yaml

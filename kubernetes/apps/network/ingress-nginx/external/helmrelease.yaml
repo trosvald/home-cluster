@@ -32,7 +32,7 @@ spec:
         type: LoadBalancer
         annotations:
           external-dns.alpha.kubernetes.io/hostname: "ingress-ext.monosense.io"
-          io.cilium/lb-ipam-ips: "10.11.11.1"
+          io.cilium/lb-ipam-ips: "10.10.10.1"
         externalTrafficPolicy: Cluster
 
       publishService:

@@ -47,7 +47,7 @@ tasks:
     dir: infrastructure/talos
     cmds:
       # - task: generate
-      - talosctl apply-config -i -n {{ .IP }} -f clusterconfig/cluster-0-{{ .NODE }}.{{ .DOMAIN }}.yaml
+      - talosctl apply-config -i -n {{ .IP }} -f clusterconfig/production-{{ .NODE }}.{{ .DOMAIN }}.yaml
 
   upgrade-master:
     internal: true
@@ -81,7 +81,7 @@ tasks:
       - task: generate
       - export TALOSCONFIG=~/devops/home-cluster/infrastructure/talos/clusterconfig/talosconfig
       # - talosctl config merge infrastructure/talos/clusterconfig/talosconfig
-      # - talosctl --talosconfig=infrastructure/talos/clusterconfig/talosconfig kubeconfig -n cluster-0.{{ .DOMAIN }} $KUBECONFIG
+      # - talosctl --talosconfig=infrastructure/talos/clusterconfig/talosconfig kubeconfig -n production.{{ .DOMAIN }} $KUBECONFIG
 
   deploy-integrations:
     internal: true
@@ -112,10 +112,12 @@ tasks:
       - echo "Wait for install"
       - sleep 300
       - echo "Bootstrapping etcd"
-      - talosctl bootstrap -n cluster-0.{{ .DOMAIN }}
-      - sleep 360
-      - talosctl -n cluster-0.{{ .DOMAIN }} kubeconfig -f
-      - task: init
+      - talosctl bootstrap -n production.{{ .DOMAIN }}
+      - sleep 5
+      - echo "Generate kubeconfig"
+      - talosctl -n production.{{ .DOMAIN }} kubeconfig -f
+      - sleep 300
+      # - task: init
       # - kubectl certificate approve $(kubectl get csr --sort-by=.metadata.creationTimestamp | grep Pending | awk '{print $1}')
       - task: deploy-integrations
 
@@ -177,4 +179,4 @@ tasks:
     desc: Show talos dashboard for node (task talos:dashboard NODE=k8s-m0)
     cmds:
       - task: generate
-      - talosctl --talosconfig=infrastructure/talos/clusterconfig/talosconfig -n {{ .NODE }}.{{ .DOMAIN }} dashboard
+      - talosctl -n {{ .NODE }}.{{ .DOMAIN }} dashboard
