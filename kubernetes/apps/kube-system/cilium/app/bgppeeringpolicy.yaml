@@ -23,7 +23,7 @@ spec:
             values: ["will-match-and-announce-all-services"],
             }
       neighbors:
-        - peerAddress: "172.16.11.254/32" 
+        - peerAddress: "172.16.11.254/32"
           peerASN: 64513
 
 ---
