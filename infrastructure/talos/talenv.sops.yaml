@@ -1,10 +1,30 @@
-clusterName: production
-domainName: monosense.io
-clusterEndpointIP: 172.16.16.4
-upsmonMasterHost: dc01-mcp-ups01@172.16.12.248:3488
-upsmonMasterUser: monosense
-upsmonMasterPass: mpti060913
-upsmonWorkerHost: dc01-mcp-ups03@172.16.12.248:3488
-upsmonWorkerUser: monosense
-upsmonWorkerPass: mpti060913
-vectorAggregatorAddr: 10.11.11.11
+clusterName: ENC[AES256_GCM,data:xKXyXYfN2B3G3A==,iv:etpoufHrFmuKQXUB7t+04RJJQasIQsJ8jhM4QymdDIk=,tag:rROx0bYrLmEXGO+yoSxOlA==,type:str]
+domainName: ENC[AES256_GCM,data:q+RWGxAAvLp6MMCP,iv:ZaApT+JztnzCCibB1dZzay5qfDwhx4zy70kJh29VuBs=,tag:pEpIfyHC/uNqlRsMBwk39Q==,type:str]
+clusterEndpointIP: ENC[AES256_GCM,data:UVVuSDf0QTw/tVg=,iv:F/JWaboO9D71RvFrpLQUwJMM4zTllloyfNU8VEbBP+k=,tag:vEccmTEF+SkElRpuBq3MJQ==,type:str]
+upsmonMasterHost: ENC[AES256_GCM,data:kCthChY54xIhcbYqhHsPRD8OFh4sQApbd9jUxcXe9nty,iv:wSKHZn74+1uyD8YhABWnM9IcArbEx7Hi8Aesy2DgzaI=,tag:Y5tMalF4sJCZUqdTinchmQ==,type:str]
+upsmonMasterUser: ENC[AES256_GCM,data:h5S8ePvbKbHz,iv:888FWP3vuGh0b/77NGj2GjITnADtFxlwkvsexa4mY0M=,tag:Q+KXRUldNZXKzdCtNAz/0w==,type:str]
+upsmonMasterPass: ENC[AES256_GCM,data:bGOOBaEJB8BMAg==,iv:0xk3+7VRBycmSrvGi2V2SlFxTAAE7He90wZFJaOW3ig=,tag:Orw9D0m/SWCF7ri5FIC4AQ==,type:str]
+upsmonWorkerHost: ENC[AES256_GCM,data:IyOgpJcv7dYWhQEX06LDFcvMIUmTsGyDQXsYheQK4yVr,iv:YbsNfznz5u8+AN0T/4+ag6KQnWz3CN765ruwzA8F5ok=,tag:WTQichUjNYtLKJkv6iOZEQ==,type:str]
+upsmonWorkerUser: ENC[AES256_GCM,data:jjn8Z/+fpvuq,iv:jjGaGIXZIiotmnRHtxZ3nPuIZaogSNYZEwnTMx5lXro=,tag:L3jssdPIAuqSYJcogN5WCA==,type:str]
+upsmonWorkerPass: ENC[AES256_GCM,data:Kzhy4h1+H/vLYw==,iv:QWqo0hV8vZ2fJOo13J5OZwAVwNp5Gz6t7nj+4FJ5gtQ=,tag:YaLTKtgS015xPmFQuPHumA==,type:str]
+vectorAggregatorAddr: ENC[AES256_GCM,data:RS1ExGgGoZnVkS4=,iv:4++KPCWi7KqDeVu86uCKCiTZFq7TTHK/jx889H3qJYM=,tag:g6kmRdE+FizJg/CD8JjXvg==,type:str]
+sops:
+    kms: []
+    gcp_kms: []
+    azure_kv: []
+    hc_vault: []
+    age:
+        - recipient: age1j3hsfptdfsfwvkf504etjkrtmajny9csrfh5s24uqh6fchmg5dgqg087ek
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBLZDNkalVUVFJOOW5OMWNu
+            c2pMMmhObGpBWk5WZGt2TFFMVStYRkhzOGpFCkQ1Vk5tQjZWc1lFRzRMNEdwUElp
+            ay9lR0Z5WlZOWlJPckdLUXlEbExSaTAKLS0tIE5ueHVkdDdvb092WHRISGl3QWdW
+            U0JINkphd21MMzdVOU9iNFdEdkV3VEkKmqQmjSPv9DpUMOd/m4rz2oYJeKteHhYj
+            vY/BoUeoUeAUfQKD5JjoUlIDAWyzDlgTwhmP+KFjZjYxSPhgsiObLA==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2023-12-18T12:34:04Z"
+    mac: ENC[AES256_GCM,data:Ui/Np23p6dcy4lQTRd9X1innb2I3MOHU8sBWArfY70wzMxbjcsKoC42/+vBnbzFhoqWZraNg2mz6Nqu3tGwSSTphBJhfCoLwK0IkCXQhYRQSSL11MvM5ZuWz3xcoRm2KhW5VPpDMpm7T3K+sYAKAx6WdWyiNl9gyC53ggcHknMI=,iv:iFNKGg7qOrK3+S6TfvNxSbU8+XIRopxbw7jWeTmA3Hc=,tag:FHX0NZf4+Nwpr3OdzdUuCg==,type:str]
+    pgp: []
+    unencrypted_regex: ^(kind)$
+    version: 3.8.1
