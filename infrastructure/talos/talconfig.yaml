@@ -305,6 +305,33 @@ controlPlane:
             - 172.16.11.0/24
     - |-
       machine:
+        registries:
+          mirrors:
+            docker.io:
+              endpoints:
+                - https://registry.monosense.io/v2/docker.io
+              overridePath: true
+            ghcr.io:
+              endpoints:
+                - https://registry.monosense.io/v2/ghcr.io
+              overridePath: true
+            quay.io:
+              endpoints:
+                - https://registry.monosense.io/v2/quay.io
+              overridePath: true
+            gcr.io:
+              endpoints:
+                - https://registry.monosense.io/v2/gcr.io
+              overridePath: true
+            registry.k8s.io:
+              endpoints:
+                - https://registry.monosense.io/v2/registry.k8s.io
+              overridePath: true
+            public.ecr.aws:
+              endpoints:
+                - https://registry.monosense.io/v2/public.ecr.aws
+              overridePath: true
+
         features:
           kubePrism:
             enabled: true
@@ -371,6 +398,32 @@ worker:
   patches:
     - |-
       machine:
+        registries:
+          mirrors:
+            docker.io:
+              endpoints:
+                - https://registry.monosense.io/v2/docker.io
+              overridePath: true
+            ghcr.io:
+              endpoints:
+                - https://registry.monosense.io/v2/ghcr.io
+              overridePath: true
+            quay.io:
+              endpoints:
+                - https://registry.monosense.io/v2/quay.io
+              overridePath: true
+            gcr.io:
+              endpoints:
+                - https://registry.monosense.io/v2/gcr.io
+              overridePath: true
+            registry.k8s.io:
+              endpoints:
+                - https://registry.monosense.io/v2/registry.k8s.io
+              overridePath: true
+            public.ecr.aws:
+              endpoints:
+                - https://registry.monosense.io/v2/public.ecr.aws
+              overridePath: true
         features:
           kubePrism:
             enabled: true

@@ -3,7 +3,7 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: cluster-apps-storage-democratic-csi-nfs
+  name: production-democratic-csi-nfs
   namespace: flux-system
 spec:
   path: "./kubernetes/apps/storage/democratic-csi/nfs"
@@ -13,7 +13,7 @@ spec:
   prune: true
   wait: true
   dependsOn:
-    - name: cluster-apps-external-secrets-stores
+    - name: production-external-secrets-stores
   interval: 10m
   retryInterval: 1m
   timeout: 5m
@@ -22,7 +22,7 @@ spec:
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: cluster-apps-storage-democratic-csi-iscsi
+  name: production-democratic-csi-iscsi
   namespace: flux-system
 spec:
   path: "./kubernetes/apps/storage/democratic-csi/iscsi"
@@ -32,7 +32,7 @@ spec:
   prune: true
   wait: true
   dependsOn:
-    - name: cluster-apps-external-secrets-stores
+    - name: production-external-secrets-stores
   interval: 10m
   retryInterval: 1m
   timeout: 5m

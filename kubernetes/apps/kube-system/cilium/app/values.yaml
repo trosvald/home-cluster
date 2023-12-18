@@ -1,6 +1,6 @@
 ---
 cluster:
-  name: cluster-0
+  name: production
   id: 1
 
 cni:

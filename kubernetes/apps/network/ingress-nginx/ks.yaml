@@ -3,7 +3,7 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: cluster-apps-nginx-shared
+  name: production-nginx-shared
   namespace: flux-system
 spec:
   interval: 10m
@@ -14,13 +14,13 @@ spec:
     name: home-cluster
   wait: true
   dependsOn:
-    - name: cluster-apps-cert-manager-issuers
+    - name: production-cert-manager-issuers
 ---
 # yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/kustomization-kustomize-v1.json
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: cluster-apps-nginx-external
+  name: production-nginx-external
   namespace: flux-system
 spec:
   interval: 10m
@@ -31,13 +31,13 @@ spec:
     name: home-cluster
   wait: false
   dependsOn:
-    - name: cluster-apps-nginx-shared
+    - name: production-nginx-shared
 ---
 # yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/kustomization-kustomize-v1.json
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: cluster-apps-nginx-internal
+  name: production-nginx-internal
   namespace: flux-system
 spec:
   interval: 10m
@@ -48,4 +48,4 @@ spec:
     name: home-cluster
   wait: false
   dependsOn:
-    - name: cluster-apps-nginx-shared
+    - name: production-nginx-shared
