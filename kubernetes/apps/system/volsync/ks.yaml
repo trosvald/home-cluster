@@ -14,7 +14,7 @@ spec:
     name: home-cluster
   dependsOn:
     - name: production-rook-ceph-cluster
-    - name: production-storage-democratic-csi-nfs
+    - name: production-synology-csi
     - name: production-snapshot-controller
   wait: true
   timeout: 2m
