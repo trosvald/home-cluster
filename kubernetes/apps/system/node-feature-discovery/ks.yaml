@@ -3,7 +3,7 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: producion-node-feature-discovery
+  name: production-node-feature-discovery
   namespace: flux-system
 spec:
   interval: 10m
@@ -18,7 +18,7 @@ spec:
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: producion-node-feature-discovery-rules
+  name: production-node-feature-discovery-rules
   namespace: flux-system
 spec:
   interval: 10m
@@ -29,4 +29,4 @@ spec:
     name: home-cluster
   wait: true
   dependsOn:
-    - name: producion-node-feature-discovery
+    - name: production-node-feature-discovery
