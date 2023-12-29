@@ -3,6 +3,7 @@ receivers:
   - name: "telegram"
     telegram_configs:
       - bot_token: ${TELEGRAM_BOT_TOKEN}
+        api_url: https://api.telegram.org
         chat_id: 776292398
         parse_mode: "HTML"
         message: |-
