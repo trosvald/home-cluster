@@ -5,6 +5,7 @@ namespace: kube-system
 resources:
   - ./helmrelease.yaml
   - ./bgppeeringpolicy.yaml
+  - ./loadbalancerippool.yaml
 configMapGenerator:
   - name: cilium-values
     files:
