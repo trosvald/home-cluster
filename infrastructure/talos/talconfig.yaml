@@ -388,7 +388,7 @@ controlPlane:
           disabled: false
           servers:
             - ntp.monosense.io
-            - time.google.co
+            - time.google.com
             - time.cloudflare.com
     - |-
       - op: remove
@@ -474,5 +474,5 @@ worker:
           disabled: false
           servers:
             - ntp.monosense.io
-            - time.google.co
+            - time.google.com
             - time.cloudflare.com
