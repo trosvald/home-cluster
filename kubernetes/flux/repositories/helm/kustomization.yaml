@@ -12,6 +12,7 @@ resources:
   - democratic-csi.yaml
   - external-secrets.yaml
   - ext-postgres-operator.yaml
+  - gitlab.yaml
   - grafana.yaml
   - ingress-nginx.yaml
   - intel.yaml
