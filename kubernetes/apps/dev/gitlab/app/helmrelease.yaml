@@ -76,7 +76,7 @@ spec:
       minio:
         enabled: true
         persistence:
-          storageClass: truenas-iscsi
+          storageClass: synology-iscsi-delete
           size: 80Gi
 
       appConfig:
@@ -187,8 +187,8 @@ spec:
     gitlab:
       gitaly:
         persistence:
-          storageClass: truenas-iscsi
-          size: 200Gi
+          storageClass: synology-iscsi-retain
+          size: 300Gi
         resources:
           requests:
             cpu: 80m

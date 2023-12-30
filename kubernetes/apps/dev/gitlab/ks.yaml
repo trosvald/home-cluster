@@ -15,4 +15,5 @@ spec:
   wait: true
   dependsOn:
     - name: production-external-secrets-stores
+    - name: production-synology-csi
     - name: production-rook-ceph-cluster

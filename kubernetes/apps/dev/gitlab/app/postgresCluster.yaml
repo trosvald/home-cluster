@@ -6,26 +6,26 @@ metadata:
   namespace: dev
 spec:
   postgresVersion: 15
-  dataSource:
-    pgbackrest:
-      stanza: db
-      configuration:
-        - secret:
-            name: pgo-s3-creds
-      global:
-        repo1-path: /gitlab/repo1
-        repo1-s3-uri-style: path
-      repo:
-        name: repo1
-        s3:
-          bucket: "crunchy-postgres"
-          endpoint: "s3.monosense.io:9000"
-          region: "dpkptr-south-rack1"
-  patroni:
-    dynamicConfiguration:
-      synchronous_mode: true
-      postgresql:
-        synchronous_commit: "on"
+  # dataSource:
+  #   pgbackrest:
+  #     stanza: db
+  #     configuration:
+  #       - secret:
+  #           name: pgo-s3-creds
+  #     global:
+  #       repo1-path: /gitlab/repo1
+  #       repo1-s3-uri-style: path
+  #     repo:
+  #       name: repo1
+  #       s3:
+  #         bucket: "crunchydata-pg"
+  #         endpoint: "ecs.monosense.io"
+  #         region: "dpk-k8s-infra"
+  # patroni:
+  #   dynamicConfiguration:
+  #     synchronous_mode: true
+  #     postgresql:
+  #       synchronous_commit: "on"
   instances:
     - name: postgres
       replicas: 2
@@ -62,6 +62,6 @@ spec:
             full: "0 1 * * 0"
             differential: "0 1 * * 1-6"
           s3:
-            bucket: "crunchy-postgres"
-            endpoint: "s3.monosense.io:9000"
-            region: "dpkptr-south-rack1"
+            bucket: "crunchydata-pg"
+            endpoint: "ecs.monosense.io"
+            region: "dpk-k8s-infra"
