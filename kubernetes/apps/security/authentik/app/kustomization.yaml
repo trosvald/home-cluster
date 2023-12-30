@@ -6,7 +6,7 @@ resources:
   - ./externalsecret.yaml
   - ./postgresCluster.yaml
   - ./helmrepository.yaml
-  - ./helmrelease.yaml
+  # - ./helmrelease.yaml
 commonLabels:
   app.kubernetes.io/name: authentik
   app.kubernetes.io/instance: authentik
