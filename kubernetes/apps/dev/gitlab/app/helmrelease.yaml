@@ -48,7 +48,7 @@ spec:
           name: gitlab-registry.monosense.io
           https: true
         minio:
-          name: minio.monosense.io
+          name: gitlab-minio.monosense.io
           https: true
 
       ingress:
