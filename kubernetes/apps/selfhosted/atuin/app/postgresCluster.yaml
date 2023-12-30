@@ -62,6 +62,6 @@ spec:
             full: "0 1 * * 0"
             differential: "0 1 * * 1-6"
           s3:
-            bucket: "crunchy-postgres"
-            endpoint: "s3.monosense.io:9000"
-            region: "dpkptr-south-rack1"
+            bucket: "crunchydata-pg"
+            endpoint: "ecs.monosense.io"
+            region: "dpk-k8s-infra"
