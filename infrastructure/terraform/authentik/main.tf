@@ -3,7 +3,7 @@ terraform {
     organization = "monosense"
 
     workspaces {
-      name = "home-cluster-authentik"
+      name = "authentik"
     }
   }
   required_providers {

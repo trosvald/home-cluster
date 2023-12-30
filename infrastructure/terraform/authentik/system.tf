@@ -6,8 +6,8 @@ resource "authentik_tenant" "home" {
   domain           = module.secret_authentik.fields["cluster_domain"]
   default          = false
   branding_title   = "Home"
-  branding_logo    = "https://static.${module.secret_authentik.fields["cluster_domain"]}/branding/Banner2-white.svg"
-  branding_favicon = "https://static.${module.secret_authentik.fields["cluster_domain"]}/branding/favicon.png"
+  branding_logo    = "https://cdn.${module.secret_authentik.fields["cluster_domain"]}/branding/Banner2-white.svg"
+  branding_favicon = "https://cdn.${module.secret_authentik.fields["cluster_domain"]}/branding/favicon.png"
 
   flow_authentication = authentik_flow.authentication.uuid
   flow_invalidation   = authentik_flow.invalidation.uuid
