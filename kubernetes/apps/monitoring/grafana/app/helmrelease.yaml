@@ -82,7 +82,7 @@ spec:
       GF_DATABASE_URL:
         secretKeyRef:
           name: grafana-pguser-grafana
-          key: jdbc-uri
+          key: uri
     grafana.ini:
       analytics:
         check_for_updates: false
