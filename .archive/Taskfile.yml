@@ -2,23 +2,27 @@
 version: "3"
 
 vars:
-  ROOT_DIR:
+  PROJECT_DIR:
     sh: "git rev-parse --show-toplevel"
-  KUBERNETES_DIR: "{{.ROOT_DIR}}/kubernetes"
-  TALOS_DIR: "{{.ROOT_DIR}}/talos"
-  TERRAFORM_DIR: "{{.ROOT_DIR}}/terraform"
+  KUBERNETES_DIR: "{{.PROJECT_DIR}}/kubernetes"
+  ANSIBLE_DIR: "{{.PROJECT_DIR}}/infrastructure/ansible"
+  TALOS_DIR: "{{.PROJECT_DIR}}/infrastructure/talos"
+  TERRAFORM_DIR: "{{.PROJECT_DIR}}/infrastructure/terraform"
+
+dotenv: [".config.env"]
 
 # env:
-#   TALOSCONFIG: ./talos/clusterconfig/talosconfig
+#   # KUBECONFIG: "$HOME/.kube/kubeconfig"
 
 includes:
-  externalsecrets: .taskfiles/externalsecrets/tasks.yaml
-  flux: .taskfiles/flux/tasks.yaml
-  k8s: .taskfiles/k8s/tasks.yaml
-  rook: .taskfiles/rook/tasks.yaml
-  talos: .taskfiles/talos/tasks.yaml
-  volsync: .taskfiles/volsync/tasks.yaml
-
+  rook: .taskfiles/Rook.yaml
+  kubernetes: .taskfiles/Kubernetes.yaml
+  precommit: .taskfiles/Precommit.yaml
+  talos: .taskfiles/Talos.yaml
+  format: .taskfiles/Format.yaml
+  lint: .taskfiles/Lint.yaml
+  flux: .taskfiles/Flux.yaml
+  externalsecret: .taskfiles/ExternalSecrets.yaml
 
 tasks:
   default:
