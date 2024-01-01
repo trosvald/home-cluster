@@ -79,6 +79,10 @@ spec:
         secretKeyRef:
           name: grafana-secret
           key: GF_DATABASE_SSL_MODE
+      GF_DATABASE_URL:
+        secretKeyRef:
+          name: grafana-pguser-grafana
+          key: jdbc-uri
     grafana.ini:
       analytics:
         check_for_updates: false
