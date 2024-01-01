@@ -75,10 +75,6 @@ spec:
         secretKeyRef:
           name: grafana-secret
           key: GF_DATABASE_TYPE
-      GF_DATABASE_SSL_MODE:
-        secretKeyRef:
-          name: grafana-secret
-          key: GF_DATABASE_SSL_MODE
       GF_DATABASE_URL:
         secretKeyRef:
           name: grafana-pguser-grafana
