@@ -71,6 +71,14 @@ spec:
         secretKeyRef:
           name: grafana-secret
           key: GF_AUTH_GENERIC_OAUTH_CLIENT_SECRET
+      GF_DATABASE_TYPE:
+        secretKeyRef:
+          name: grafana-secret
+          key: GF_DATABASE_TYPE
+      GF_DATABASE_SSL_MODE:
+        secretKeyRef:
+          name: grafana-secret
+          key: GF_DATABASE_SSL_MODE
     grafana.ini:
       analytics:
         check_for_updates: false
