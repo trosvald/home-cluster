@@ -266,7 +266,7 @@ spec:
         global:
           # renovate: depName="Kubernetes / Views / Global"
           gnetId: 15757
-          revision: 31
+          revision: 34
           datasource: Prometheus
         namespaces:
           # renovate: depName="Kubernetes / Views / Namespaces"
